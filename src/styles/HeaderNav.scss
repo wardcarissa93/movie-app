@@ -12,13 +12,12 @@
 
 header {
   align-items: center;
-  // Pseudo-class &:hover to define hover state styles
   background-color: $primary-color;
   box-shadow: 2px 1px 15px 0px $box-shadow-color;
   display: flex;
   height: 6rem;
   justify-content: space-between;
-  max-width: 100vw;
+  // max-width: 100vw;
   transition: $base-transition;
   width: 100%;
   z-index: 2;

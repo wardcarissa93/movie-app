@@ -83,27 +83,17 @@ const HeaderNav = () => {
           {/* Navigation links */}
           <li className="main-navigation-li">
             <a className="main-navigation-a" href="#0">
-              Breaking News
+              Favorites
             </a>
           </li>
           <li className="main-navigation-li">
             <a className="main-navigation-a" href="#0">
-              Frontend
+              Watch List
             </a>
           </li>
           <li className="main-navigation-li">
             <a className="main-navigation-a" href="#0">
-              Backend
-            </a>
-          </li>
-          <li className="main-navigation-li">
-            <a className="main-navigation-a" href="#0">
-              Web Design
-            </a>
-          </li>
-          <li className="main-navigation-li">
-            <a className="main-navigation-a" href="#0">
-              Cloud
+              About
             </a>
           </li>
         </ul>
