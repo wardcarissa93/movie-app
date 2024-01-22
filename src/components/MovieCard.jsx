@@ -69,6 +69,7 @@ function MovieCard({ movie }) {
                         <div className="plus-sign"></div>
                     </button>
                 </div>
+                <div className="star"></div>
             </div>
         </div>
     );

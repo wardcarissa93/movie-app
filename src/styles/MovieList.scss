@@ -1,6 +1,8 @@
 #movie-list {
     display: grid;
     grid-template-columns: 100%;
+    // get rid of the below later
+    margin-top: 6rem;
 }
 
 @media (min-width: 640px) {

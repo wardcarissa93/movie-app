@@ -5,7 +5,7 @@ function MovieDetails({ movie }) {
   const { title, overview, poster_path, release_date, vote_average } = movie;
 
   return (
-    <div>
+    <div id="details-wrapper">
       <h3>Details for <i>{title}</i></h3>
       <div id="movie-details">
         <div>
