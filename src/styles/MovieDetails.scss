@@ -1,0 +1,15 @@
+img {
+    max-width: 80%;
+    margin: 0;
+}
+
+#movie-details {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    #movie-details {
+        flex-direction: row;
+    }
+}

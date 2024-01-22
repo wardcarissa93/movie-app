@@ -17,9 +17,8 @@ header {
   display: flex;
   height: 6rem;
   justify-content: space-between;
-  // max-width: 100vw;
   transition: $base-transition;
-  width: 100%;
+  width: $full;
   z-index: 2;
 
   // Nested selector with class modifier
@@ -43,7 +42,7 @@ header {
 
     // Nested selector with class modifier
     &.open {
-      height: 10.5rem;
+      height: 6.5rem;
       margin: 0;
     }
 
@@ -106,7 +105,7 @@ header {
     // Nested selector with class modifier
     &.show {
       background-color: $primary-color;
-      width: 100%;
+      width: $full;
 
       ul {
         color: $secondary-color;
@@ -130,14 +129,14 @@ header {
     ul {
       display: none;
 
-      .main-navigation-a {
+      .main-navigation-link {
         // Applying mixin with parameters
         @include nav-link($color: $secondary-color, $hover-color: black);
       }
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 960px) {
     left: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -179,7 +178,7 @@ header {
             border-left: 1px solid $secondary-color;
           }
 
-          .main-navigation-a {
+          .main-navigation-link {
             display: block;
             padding: 0.25rem 1rem;
             // Applying mixin with parameters

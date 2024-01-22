@@ -20,10 +20,7 @@ function WatchListPage() {
   }, []);
 
   return (
-    <div>
-      <h2>Watch List Page</h2>
-      <MovieList movies={watchlist} />
-    </div>
+    <MovieList movies={watchlist} />
   );
 }
 

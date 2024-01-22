@@ -16,7 +16,7 @@ function AppRouter() {
           <Routes>
             <Route path="/" element={<PageHome />} />
             <Route path="/about" element={<PageAbout />} />
-            <Route path="/:id" exact element={<PageDetails />} />
+            <Route path="/movie/:id" exact element={<PageDetails />} />
             <Route path="/favorites" element={<PageFavorites />} />
             {/* <Route path="*" element={<PageNotFound />} /> */}
           </Routes>

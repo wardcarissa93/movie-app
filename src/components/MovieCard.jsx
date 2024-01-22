@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import "../styles/MovieCard.scss";
 
 function MovieCard({ movie }) {
     const [isFavorite, setIsFavorite] = useState(false);
@@ -39,21 +40,36 @@ function MovieCard({ movie }) {
         setIsInWatchList(!isInWatchList);
     };
 
-    const { id, poster_path, title, release_date, vote_average } = movie;
+    const { id, overview, poster_path, title, release_date, vote_average } = movie;
+    console.log(movie);
 
     return (
-        <div>
+        <div className="movie-card">
             <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
-            <h3>{title}</h3>
-            <p>Release Date: {release_date}</p>
-            <p>Rating: {vote_average}</p>
-            <button onClick={toggleFavorite}>
-                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-            </button>
-            <button onClick={toggleWatchList}>
-                {isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}
-            </button>
-            <Link to={`/movie/${id}`}>More Info</Link>
+            <div className='movie-data'>
+                <h3>{title}</h3>
+                <p>{overview.substr(0, 65)}... <Link to={`/movie/${id}`}>More Info</Link></p>
+                <div className="release-rating">
+                    <div className="release-rating-labels">
+                        <p>Released:</p>
+                        <p>Rating:</p>
+                    </div>
+                    <div className="release-rating-values">
+                        <p>{release_date}</p>
+                        <p>{vote_average}</p>
+                    </div>
+                </div>
+                <div className="favorite-watchlist">
+                    <button onClick={toggleFavorite}>
+                        {/* {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'} */}
+                        <div className="heart"></div>
+                    </button>
+                    <button onClick={toggleWatchList}>
+                        {/* {isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} */}
+                        <div className="plus-sign"></div>
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -61,6 +77,7 @@ function MovieCard({ movie }) {
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         id: PropTypes.number.isRequired,
+        overview: PropTypes.string.isRequired,
         poster_path: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         release_date: PropTypes.string.isRequired,

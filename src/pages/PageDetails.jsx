@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import MovieDetails from '../components/MovieDetails';
 import { fetchMovieDetails } from '../api/movieApi';
 
-function MoviePage() {
+function PageDetails() {
   // Fetch movie details using movie ID from URL params
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
@@ -20,10 +20,9 @@ function MoviePage() {
 
   return (
     <div>
-      <h2>Movie Details Page</h2>
       {movieDetails ? <MovieDetails movie={movieDetails} /> : <p>Loading...</p>}
     </div>
   );
 }
 
-export default MoviePage;
+export default PageDetails;

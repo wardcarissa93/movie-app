@@ -19,10 +19,7 @@ function FavoritesPage() {
   }, []);
 
   return (
-    <div>
-      <h2>Favorites Page</h2>
-      <MovieList movies={favorites} />
-    </div>
+    <MovieList movies={favorites} />
   );
 }
 
