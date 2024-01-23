@@ -1,6 +1,19 @@
+@use 'variables' as *;
+
 img {
     max-width: 80%;
     margin: 0;
+}
+
+.rating-label {
+    max-width: 15%;
+}
+
+.line {
+    width: 95%;
+    height: 0.25rem;
+    background-color: $primary-color;
+    margin: 1rem auto;
 }
 
 #movie-details-wrapper {
@@ -13,7 +26,7 @@ img {
 
         button {
             width: 50%;
-            height: 50px;
+            height: 15%;
             display: flex;
             justify-content: center;
             padding-left: 3px;
@@ -22,7 +35,7 @@ img {
             font-size: 10pt;
 
             &:hover {
-                border: 1px solid black;
+                border: 1px solid $primary-color;
             }
 
             p.favorite-label {
@@ -71,6 +84,67 @@ img {
 
             .plus-sign:after {
                 transform: rotate(90deg) translate(10px, 0);
+            }
+        }
+    }
+
+    .release-container {
+        display: flex;
+        justify-content: center;
+
+        &>* {
+            max-width: 30%;
+        }
+    }
+
+    .rating-container {
+        display: flex;
+        justify-content: center;
+
+        .star-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
+
+            .star {
+                margin: 5px 0;
+                position: relative;
+                display: block;
+                width: 0px;
+                height: 0px;
+                border-right: 10px solid transparent;
+                border-bottom: 7px solid $star-color;
+                border-left: 10px solid transparent;
+                transform: rotate(35deg);
+            }
+
+            .star:before {
+                border-bottom: 8px solid $star-color;
+                border-left: 3px solid transparent;
+                border-right: 3px solid transparent;
+                position: absolute;
+                height: 0;
+                width: 0;
+                top: -4.5px;
+                left: -6.5px;
+                display: block;
+                content: '';
+                transform: rotate(-35deg);
+            }
+
+            .star:after {
+                position: absolute;
+                display: block;
+                top: 0.3px;
+                left: -10.5px;
+                width: 0px;
+                height: 0px;
+                border-right: 10px solid transparent;
+                border-bottom: 7px solid $star-color;
+                border-left: 10px solid transparent;
+                transform: rotate(-70deg);
+                content: '';
             }
         }
     }

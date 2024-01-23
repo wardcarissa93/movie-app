@@ -40,11 +40,19 @@ function MovieDetails({ movie }) {
     setIsInWatchList(!isInWatchList);
   };
 
+  const generateStars = () => {
+    const numberOfStars = Math.round(movie.vote_average);
+    return Array.from({ length: numberOfStars }, (_unused, index) => (
+      <div key={index} className="star"></div>
+    ));
+  };
+
   let { title, overview, poster_path, release_date, vote_average } = movie;
 
   return (
     <div id="details-wrapper">
       <h3>Details for <i>{title}</i></h3>
+      <div className="line"></div>
       <div id="movie-details-wrapper">
         <div>
           <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
@@ -63,12 +71,16 @@ function MovieDetails({ movie }) {
           <div>
             <p>{overview}</p>
             <div className="release-rating">
-              <p>Release Date: {dateFormat(release_date, "mmm dS, yyyy")}</p>
-              <p>Rating: ({(vote_average*10).toFixed(1)}%)</p>
+              <div className="release-container">
+                <div>Release Date: </div>
+                <div>{dateFormat(release_date, "mmm dS, yyyy")}</div>
+              </div>
+              <div className='rating-container'><p className="rating-label">Rating: </p><div className="star-container">{generateStars()}</div><p className="rating-label">({(vote_average*10).toFixed(1)}%)</p></div>
             </div>
           </div>
         </div>
       </div>
+      <div className="line"></div>
     </div>
   );
 }
