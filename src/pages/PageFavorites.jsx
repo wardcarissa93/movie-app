@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import MovieList from '../components/MovieList';
+import { fetchMovieDetails } from '../api/movieApi';
 
-function FavoritesPage() {
+function PageFavorites() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    // Retrieve favorited movies from local storage
-    const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
-    // Fetch detailed movie information from TMDB using the movie IDs
-    const favoriteMovies = favoriteIds.map(id => ({
-      id,
-      title: `Movie ${id}`,
-      releaseDate: '2022-01-01',
-      rating: 75,
-      posterUrl: 'https://example.com/poster.jpg',
-    }));
-    setFavorites(favoriteMovies);
+    const fetchFavoriteMovies = async () => {
+      const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+      const favoriteMovies = await Promise.all(favoriteIds.map(fetchMovieDetails));
+      setFavorites(favoriteMovies.filter(movie => movie)); // Filter out null values
+    };
+
+    fetchFavoriteMovies();
   }, []);
 
   return (
@@ -23,5 +20,5 @@ function FavoritesPage() {
   );
 }
 
-export default FavoritesPage;
+export default PageFavorites;
 

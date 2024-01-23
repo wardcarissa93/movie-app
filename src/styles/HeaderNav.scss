@@ -10,6 +10,10 @@
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 header {
   align-items: center;
   background-color: $primary-color;
@@ -20,6 +24,7 @@ header {
   transition: $base-transition;
   width: $full;
   z-index: 2;
+  position: relative;
   margin-bottom: 1rem;
 
   // Nested selector with class modifier
