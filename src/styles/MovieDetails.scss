@@ -153,6 +153,12 @@ img {
 @media (min-width: 768px) {
     #movie-details-wrapper {
         flex-direction: row;
+
+        #movie-details-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }
 
