@@ -3,17 +3,87 @@ img {
     margin: 0;
 }
 
-#details-wrapper {
-    margin-top: 6rem;
-}
-
-#movie-details {
+#movie-details-wrapper {
     display: flex;
     flex-direction: column;
+
+    .favorite-watchlist {
+        display: flex;
+        justify-content: space-evenly;
+
+        button {
+            width: 50%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            padding-left: 3px;
+            padding-top: 12px;
+            background-color: transparent;
+            font-size: 10pt;
+
+            &:hover {
+                border: 1px solid black;
+            }
+
+            p.favorite-label {
+                margin: 0.25rem 1rem;
+            }
+
+            p.watch-list-label {
+                margin: 0.25rem 1rem;
+            }
+
+            .heart, .plus-sign {
+                position: relative;
+                width: 20px;
+                height: 18px;
+            }
+
+            .heart:before, .heart:after {
+                position: absolute;
+                content: '';
+                left: 5px;
+                top: 0;
+                width: 10.4px;
+                height: 16px;
+                background-color: red;
+                border-radius: 5px 5px 0 0;
+                transform: rotate(-50deg);
+                transform-origin: 50% 75%;
+            }
+
+            .heart:after {
+                transform: rotate(50deg);
+                transform-origin: 50% 75%;
+            }
+
+            .plus-sign:before, .plus-sign:after {
+                position: absolute;
+                content: '';
+                width: 20px;
+                height: 5px;
+                background-color: green;
+            }
+
+            .plus-sign:before {
+                transform: translate(0, 10px);
+            }
+
+            .plus-sign:after {
+                transform: rotate(90deg) translate(10px, 0);
+            }
+        }
+    }
 }
 
 @media (min-width: 768px) {
-    #movie-details {
+    #movie-details-wrapper {
         flex-direction: row;
+    }
+}
+
+@media (min-width: 960px) {
+    #details-wrapper {
+        margin-top: 7rem;
     }
 }
