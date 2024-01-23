@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import "../styles/MovieDetails.scss";
 
 function MovieDetails({ movie }) {
-  const { title, overview, poster_path, release_date, vote_average } = movie;
+  let { title, overview, poster_path, release_date, vote_average } = movie;
 
   return (
     <div id="details-wrapper">
@@ -14,7 +15,7 @@ function MovieDetails({ movie }) {
         <div>
           <p>{overview}</p>
           <div className="release-rating"></div>
-          <p>Release Date: {release_date}</p>
+          <p>Release Date: {dateFormat(release_date, "mmm dS, yyyy")}</p>
           <p>Rating: {vote_average}</p>
         </div>
       </div>

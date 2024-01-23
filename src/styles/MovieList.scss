@@ -1,13 +1,17 @@
 #movie-list {
     display: grid;
     grid-template-columns: 100%;
-    // get rid of the below later
-    margin-top: 6rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
     #movie-list {
         grid-template-columns: 50% 50%;
+    }
+}
+
+@media (min-width: 960px) {
+    #movie-list {
+        margin-top: 7rem;
     }
 }
 

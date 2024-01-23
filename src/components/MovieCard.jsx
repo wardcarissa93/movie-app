@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import "../styles/MovieCard.scss";
@@ -23,7 +24,7 @@ function MovieCard({ movie }) {
             const updatedFavorites = favorites.filter(id => id !== movie.id);
             localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         } else {
-            localStorage.setItem('favorites', JSON.stringify([favorites, movie.id]));
+            localStorage.setItem('favorites', JSON.stringify([...favorites, movie.id]));
         }
         setIsFavorite(!isFavorite);
     };
@@ -35,19 +36,26 @@ function MovieCard({ movie }) {
             const updatedWatchList = watchList.filter(id => id !== movie.id);
             localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
         } else {
-            localStorage.setItem('watchList'), JSON.stringify([...watchList, movie.id]);
+            localStorage.setItem('watchList', JSON.stringify([...watchList, movie.id]));
         }
         setIsInWatchList(!isInWatchList);
     };
 
-    const { id, overview, poster_path, title, release_date, vote_average } = movie;
-    console.log(movie);
+    const generateStars = () => {
+        const numberOfStars = Math.round(movie.vote_average);
+        return Array.from({ length: numberOfStars }, (_unused, index) => (
+            <div key={index} className="star"></div>
+        ));
+    };
+
+    const { id, overview, poster_path, title, release_date } = movie;
+    // console.log(movie);
 
     return (
         <div className="movie-card">
             <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
             <div className='movie-data'>
-                <h3>{title}</h3>
+                <h3 className="movie-title">{title}</h3>
                 <p>{overview.substr(0, 65)}... <Link to={`/movie/${id}`}>More Info</Link></p>
                 <div className="release-rating">
                     <div className="release-rating-labels">
@@ -55,21 +63,18 @@ function MovieCard({ movie }) {
                         <p>Rating:</p>
                     </div>
                     <div className="release-rating-values">
-                        <p>{release_date}</p>
-                        <p>{vote_average}</p>
+                        <p>{dateFormat(release_date, "mmm dS, yyyy")}</p>
+                        <div className="star-container">{generateStars()}</div>
                     </div>
                 </div>
                 <div className="favorite-watchlist">
-                    <button onClick={toggleFavorite}>
-                        {/* {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'} */}
+                    <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
                         <div className="heart"></div>
                     </button>
-                    <button onClick={toggleWatchList}>
-                        {/* {isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} */}
+                    <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
                         <div className="plus-sign"></div>
                     </button>
                 </div>
-                <div className="star"></div>
             </div>
         </div>
     );
