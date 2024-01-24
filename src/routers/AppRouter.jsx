@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import HeaderNav from '../components/HeaderNav';
+import Footer from '../components/Footer';
 import PageHome from '../pages/PageHome';
 import PageAbout from '../pages/PageAbout';
 import PageDetails from '../pages/PageDetails';
@@ -23,6 +24,7 @@ function AppRouter() {
             {/* <Route path="*" element={<PageNotFound />} /> */}
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );

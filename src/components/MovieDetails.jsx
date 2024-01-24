@@ -61,11 +61,11 @@ function MovieDetails({ movie }) {
           <div className="favorite-watchlist">
               <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
                   <p className='favorite-label'>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</p>
-                  <div className="heart"></div>
+                  <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
               </button>
               <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
                   <p className="watch-list-label">{isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}</p>
-                  <div className="plus-sign"></div>
+                  <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
               </button>
           </div>
           <div>
