@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiKey = 'ea3a43981a82687d4ba7304f8d880abb';
+const apiKey = import.meta.env.VITE_REACT_APP_TMDB_API_KEY;
+console.log('API key:', apiKey);
 const baseUrl = 'https://api.themoviedb.org/3';
 
 // Fetch popular movies
