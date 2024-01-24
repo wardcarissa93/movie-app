@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+.page-favorites-container {
+    margin: 0;
+
+    .empty-favorites-container {
+        display: flex;
+        flex-direction: column;
+        margin: 3rem 0;
+
+        .favorites-instructions {
+            display: flex;
+            justify-content: center;
+
+            .heart {
+                position: relative;
+                width: 20px;
+                height: 18px;
+                margin: 0 0.5rem;
+
+                &:before, &:after {
+                    position: absolute;
+                    content: '';
+                    left: 5px;
+                    top: 0;
+                    width: 10.4px;
+                    height: 16px;
+                    background-color: $unselected-color;
+                    border-radius: 5px 5px 0 0;
+                    transform: rotate(-50deg);
+                    transform-origin: 50% 75%;
+                }
+
+                &:after {
+                    transform: rotate(50deg);
+                }
+
+                &.favorite:before, &.favorite:after {
+                    background-color: $heart-color;
+                }
+            }
+        }
+    }
+}

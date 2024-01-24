@@ -41,6 +41,7 @@ function MovieCard({ movie }) {
         setIsInWatchList(!isInWatchList);
     };
 
+    // Convert the movie's rating to stars
     const generateStars = () => {
         const numberOfStars = Math.round(movie.vote_average);
         return Array.from({ length: numberOfStars }, (_unused, index) => (
@@ -48,12 +49,19 @@ function MovieCard({ movie }) {
         ));
     };
 
-    const { id, overview, poster_path, title, release_date } = movie;
-    // console.log(movie);
+    const getPosterPath = () => {
+        // Check if poster_path is available, if not use the alternate image
+        return movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : '../../public/images/image-not-found.png'; 
+    };
 
+    const { id, overview, title, release_date } = movie;
+    // console.log(movie);
+0
     return (
         <div className="movie-card">
-            <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
+            <img src={getPosterPath()} alt={title} />
             <div className='movie-data'>
                 <h3 className="movie-title">{title}</h3>
                 <p>{overview.substr(0, 65)}... <Link to={`/movie/${id}`}>More Info</Link></p>
@@ -69,10 +77,10 @@ function MovieCard({ movie }) {
                 </div>
                 <div className="favorite-watchlist">
                     <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
-                        <div className="heart"></div>
+                        <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
                     </button>
                     <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
-                        <div className="plus-sign"></div>
+                        <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
                     </button>
                 </div>
             </div>

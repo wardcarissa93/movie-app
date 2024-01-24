@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arimo, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   margin: 0 auto;
@@ -25,7 +25,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -56,6 +56,20 @@ button:focus-visible {
 
 div {
   width: 100%;
+}
+
+#category-select-form {
+  padding: 1.5rem;
+}
+
+#categorySelect {
+  margin: 0 1rem;
+}
+
+@media (min-width: 960px) {
+  #page-home {
+    margin-top: 7rem;
+  }
 }
 
 @media (prefers-color-scheme: light) {

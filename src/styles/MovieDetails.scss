@@ -11,7 +11,7 @@ img {
 
 .line {
     width: 95%;
-    height: 0.25rem;
+    height: 0.125rem;
     background-color: $primary-color;
     margin: 1rem auto;
 }
@@ -67,7 +67,6 @@ img {
 
             .heart:after {
                 transform: rotate(50deg);
-                transform-origin: 50% 75%;
             }
 
             .plus-sign:before, .plus-sign:after {
@@ -153,6 +152,12 @@ img {
 @media (min-width: 768px) {
     #movie-details-wrapper {
         flex-direction: row;
+
+        #movie-details-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }
 

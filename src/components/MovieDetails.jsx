@@ -57,7 +57,7 @@ function MovieDetails({ movie }) {
         <div>
           <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
         </div>
-        <div>
+        <div id="movie-details-data"> 
           <div className="favorite-watchlist">
               <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
                   <p className='favorite-label'>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</p>
