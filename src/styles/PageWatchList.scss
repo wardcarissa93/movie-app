@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+.page-watchlist-container {
+    margin: 0;
+
+    .empty-watchlist-container {
+        display: flex;
+        flex-direction: column;
+        margin: 3rem 0;
+
+        .watchlist-instructions {
+            display: flex;
+            justify-content: center;
+
+            .plus-sign {
+                position: relative;
+                width: 20px;
+                height: 18px;
+                margin-right: 1.25rem;
+
+                &:before, &:after {
+                    position: absolute;
+                    content: '';
+                    width: 20px;
+                    height: 5px;
+                    background-color: $unselected-color;
+                }
+
+                &:before {
+                    transform: translate(0, 10px);
+                }
+
+                &:after {
+                    transform: rotate(90deg) translate(10px, 0);
+                }
+
+                &.watchlist:before, &.watchlist:after {
+                    background-color: $plus-sign-color;
+                }
+            }
+        }
+    }
+}

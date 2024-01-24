@@ -54,7 +54,7 @@ const HeaderNav = () => {
           <span className="bar" id="bar3"></span>
         </span>
       </button>
-      <Link className={`logo ${isMenuOpen ? "hide" : ""}`} to={'/'}>
+      <Link className={`logo ${isMenuOpen ? "hide" : ""}`} to={'/'} title="Return to Home">
         <img src="images/logo.svg" alt="site-logo"></img>
       </Link>
       <nav id="main-navigation" className={isMenuOpen ? "show" : ""}>
