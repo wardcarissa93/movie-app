@@ -7,7 +7,7 @@ import {
   fetchUpcomingMovies
 } from '../api/movieApi';
 
-function Home() {
+function PageHome() {
   const [movies, setMovies] = useState([]);
   const [category, setCategory] = useState('popular'); // Default category is popular
 
@@ -79,4 +79,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default PageHome;

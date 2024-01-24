@@ -1,9 +1,9 @@
 import About from '../components/About';
 
-function AboutPage() {
+function PageAbout() {
   return (
     <About/>
   );
 }
 
-export default AboutPage;
+export default PageAbout;

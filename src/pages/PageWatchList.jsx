@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import MovieList from '../components/MovieList';
 
-function WatchListPage() {
+function PageWatchList() {
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ function WatchListPage() {
   );
 }
 
-export default WatchListPage;
+export default PageWatchList;
