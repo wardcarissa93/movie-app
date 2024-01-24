@@ -28,7 +28,11 @@ function PageHome() {
           fetchedMovies = await fetchPopularMovies();
           break;
       }
-      setMovies(fetchedMovies);
+
+      // Limit the number of movies to 12
+      const limitedMovies = fetchedMovies.slice(0, 12);
+      
+      setMovies(limitedMovies);
     };
 
     fetchMoviesData();
