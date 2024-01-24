@@ -4,13 +4,13 @@ import { fetchMovieDetails } from '../api/movieApi';
 import '../styles/PageWatchList.scss';
 
 function PageWatchList() {
-  const [watchList, setWatchList] = useState([]);
+  const [watchlist, setWatchList] = useState([]);
 
   useEffect(() => {
     const fetchWatchList = async () => {
-      const watchListIds = JSON.parse(localStorage.getItem('watchList')) || [];
-      const watchListMovies = await Promise.all(watchListIds.map(fetchMovieDetails));
-      setWatchList(watchListMovies.filter(movie => movie)); // Filter out null values
+      const watchlistIds = JSON.parse(localStorage.getItem('watchlist')) || [];
+      const watchlistMovies = await Promise.all(watchlistIds.map(fetchMovieDetails));
+      setWatchList(watchlistMovies.filter(movie => movie)); // Filter out null values
     };
 
     fetchWatchList();
@@ -20,7 +20,7 @@ function PageWatchList() {
     <div className="page-watchlist-container">
       <h3>Your Watch List</h3>
       <div className="line"></div>
-      {watchList.length === 0 ? (
+      {watchlist.length === 0 ? (
         <div className="empty-watchlist-container">
           <p>You have not added any movies to your Watch List yet!</p>
           <div className="watchlist-instructions"> 
@@ -30,7 +30,7 @@ function PageWatchList() {
           </div>
         </div>
       ) : (
-        <MovieList movies={watchList} />
+        <MovieList movies={watchlist} />
       )}
       <div className="line"></div>
     </div>
@@ -38,3 +38,4 @@ function PageWatchList() {
 }
 
 export default PageWatchList;
+
