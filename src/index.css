@@ -58,6 +58,20 @@ div {
   width: 100%;
 }
 
+#category-select-form {
+  padding: 2rem;
+}
+
+#categorySelect {
+  margin: 0 1rem;
+}
+
+@media (min-width: 960px) {
+  #page-home {
+    margin-top: 7rem;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

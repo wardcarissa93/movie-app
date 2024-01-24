@@ -34,44 +34,22 @@ function PageHome() {
     fetchMoviesData();
   }, [category]);
 
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+
   return (
     <div id="page-home">
-      <div>
-        <label>
-          <input 
-            type="radio"
-            value="popular"
-            checked={category === 'popular'}
-            onChange={() => setCategory('popular')}
-          />
-          Popular
-        </label>
-        <label>
-          <input 
-            type="radio" 
-            value="top_rated"
-            checked={category === 'top_rated'}
-            onChange={() => setCategory('top_rated')}
-          />
-          Top Rated
-        </label>
-        <label>
-          <input 
-            type="radio"
-            value="now_playing"
-            checked={category === 'now_playing'}
-            onChange={() => setCategory('now_playing')} 
-          />
-          Now Playing
-        </label>
-        <label>
-          <input 
-            type="radio" 
-            value="upcoming"
-            checked={category === 'upcoming'}
-            onChange={() => setCategory('upcoming')}
-          />
-          Upcoming
+      <div id="category-select-form">
+        <label htmlFor="categorySelect">
+          Display
+          <select id="categorySelect" value={category} onChange={handleCategoryChange}>
+            <option value="popular">Popular</option>
+            <option value="top_rated">Top Rated</option>
+            <option value="now_playing">Now Playing</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+          movies:
         </label>
       </div>
       <MovieList movies={movies} />
