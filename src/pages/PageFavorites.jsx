@@ -19,6 +19,7 @@ function PageFavorites() {
   return (
     <div className="page-favorites-container">
       <h3>Your Favorites</h3>
+      <div className="line"></div>
       {favorites.length === 0 ? (
         <div className="empty-favorites-container">
           <p>You have not added any movies to your Favorites List yet!</p>
@@ -31,6 +32,7 @@ function PageFavorites() {
       ) : (
         <MovieList movies={favorites} />
       )}
+      <div className="line"></div>
     </div>
   );
 }

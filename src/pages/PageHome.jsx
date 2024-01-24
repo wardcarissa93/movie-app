@@ -52,7 +52,9 @@ function PageHome() {
           movies:
         </label>
       </div>
+      <div className="line"></div>
       <MovieList movies={movies} />
+      <div className="line"></div>
     </div>
   );
 }
