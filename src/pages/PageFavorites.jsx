@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import MovieList from '../components/MovieList';
 import { fetchMovieDetails } from '../api/movieApi';
+import { useSelector } from 'react-redux';
 import '../styles/PageFavorites.scss';
 
 function PageFavorites() {
-  const [favorites, setFavorites] = useState([]);
+  const favorites = useSelector((state) => state.user.favorites);
+
+  // Corrected the useState hook
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+  const fetchFavoriteMovies = async () => {
+    const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favoriteMovies = await Promise.all(favoriteIds.map(fetchMovieDetails));
+    setFavoriteMovies(favoriteMovies.filter(movie => movie && favorites.includes(movie.id)));
+  };
 
   useEffect(() => {
-    const fetchFavoriteMovies = async () => {
-      const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
-      const favoriteMovies = await Promise.all(favoriteIds.map(fetchMovieDetails));
-      setFavorites(favoriteMovies.filter(movie => movie)); // Filter out null values
-    };
-
     fetchFavoriteMovies();
-  }, []);
+  }, [favorites]);
 
   return (
     <div className="page-favorites-container">
@@ -30,7 +34,7 @@ function PageFavorites() {
           </div>
         </div>
       ) : (
-        <MovieList movies={favorites} />
+        <MovieList movies={favoriteMovies} hideUnfavorited={true} />
       )}
       <div className="line"></div>
     </div>
@@ -38,4 +42,3 @@ function PageFavorites() {
 }
 
 export default PageFavorites;
-

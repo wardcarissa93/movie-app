@@ -11,18 +11,23 @@ import {
 } from '../features/user/userSlice';
 import "../styles/MovieCard.scss";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, hideUnfavorited }) {
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.user.favorites);
     const watchlist = useSelector((state) => state.user.watchlist);
 
     const [isFavorite, setIsFavorite] = useState(false);
     const [isInWatchList, setIsInWatchList] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {
         setIsFavorite(favorites.includes(movie.id));
         setIsInWatchList(watchlist.includes(movie.id));
     }, [favorites, watchlist, movie.id]);
+
+    useEffect(() => {
+        setIsHidden(hideUnfavorited && !isFavorite);
+    }, [hideUnfavorited, isFavorite])
 
     const toggleFavorite = () => {
         if (isFavorite) {
@@ -61,7 +66,7 @@ function MovieCard({ movie }) {
     // console.log(movie);
 0
     return (
-        <div className="movie-card">
+        <div className={`movie-card ${isHidden ? 'hidden' : ''}`}>
             <img src={getPosterPath()} alt={title} />
             <div className='movie-data'>
                 <h3 className="movie-title">{title}</h3>
@@ -98,6 +103,7 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         vote_average: PropTypes.number.isRequired,
     }).isRequired,
+    hideUnfavorited: PropTypes.bool.isRequired,
 };
 
 export default MovieCard;
