@@ -1,38 +1,40 @@
 import { useEffect, useState } from 'react';
 import MovieList from '../components/MovieList';
 import { fetchMovieDetails } from '../api/movieApi';
+import { useSelector } from 'react-redux';
 import '../styles/PageWatchList.scss';
 
 function PageWatchList() {
-  const [watchList, setWatchList] = useState([]);
+  const watchList = useSelector((state) => state.user.watchlist);
+
+  const [watchListMovies, setWatchListMovies] = useState([]);
 
   useEffect(() => {
-    const fetchWatchList = async () => {
-      const watchListIds = JSON.parse(localStorage.getItem('watchList')) || [];
+    const fetchWatchListMovies = async () => {
+      const watchListIds = JSON.parse(localStorage.getItem('watchlist')) || [];
       const watchListMovies = await Promise.all(watchListIds.map(fetchMovieDetails));
-      setWatchList(watchListMovies.filter(movie => movie)); // Filter out null values
+      setWatchListMovies(watchListMovies.filter(movie => movie && (watchList ?? []).includes(movie.id)));    
     };
 
-    fetchWatchList();
-  }, []);
+    fetchWatchListMovies();
+  }, [watchList]);
 
   return (
     <div className="page-watchlist-container">
       <h3>Your Watch List</h3>
       <div className="line"></div>
-      {watchList.length === 0 ? (
+      {watchListMovies.length === 0 ? (
         <div className="empty-watchlist-container">
-          <p>You have not added any movies to your Watch List yet!</p>
-          <div className="watchlist-instructions"> 
+          <p>You haven&apos;t added any movies to your Watch List yet!</p>
+          <div className="watchlist-instructions">
             Create your Watch List by clicking the
             <div className="plus-sign watchlist"></div>
             button by each movie.
           </div>
         </div>
       ) : (
-        <MovieList movies={watchList} />
+        <MovieList movies={watchListMovies} hideUnfavorited={true} />
       )}
-      <div className="line"></div>
     </div>
   );
 }

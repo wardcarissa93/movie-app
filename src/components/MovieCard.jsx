@@ -2,41 +2,47 @@ import { useState, useEffect } from 'react';
 import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    addToFavorites,
+    removeFromFavorites,
+    addToWatchList,
+    removeFromWatchList
+} from '../features/user/userSlice';
 import "../styles/MovieCard.scss";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, hideUnfavorited }) {
+    const dispatch = useDispatch();
+    const favorites = useSelector((state) => state.user.favorites);
+    const watchlist = useSelector((state) => state.user.watchlist);
+
     const [isFavorite, setIsFavorite] = useState(false);
     const [isInWatchList, setIsInWatchList] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {
-        // Check if movie is in favorites and watchlist in local storage
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        const watchList = JSON.parse(localStorage.getItem('watchList')) || [];
-
         setIsFavorite(favorites.includes(movie.id));
-        setIsInWatchList(watchList.includes(movie.id));
-    }, [movie.id]);
+        setIsInWatchList(watchlist.includes(movie.id));
+    }, [favorites, watchlist, movie.id]);
+
+    useEffect(() => {
+        setIsHidden(hideUnfavorited && !isFavorite);
+    }, [hideUnfavorited, isFavorite])
 
     const toggleFavorite = () => {
-        // Toggle favorite status and update local storage
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
         if (isFavorite) {
-            const updatedFavorites = favorites.filter(id => id !== movie.id);
-            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+            dispatch(removeFromFavorites(movie.id));
         } else {
-            localStorage.setItem('favorites', JSON.stringify([...favorites, movie.id]));
+            dispatch(addToFavorites(movie.id));
         }
         setIsFavorite(!isFavorite);
     };
 
     const toggleWatchList = () => {
-        // Toggle watchlist status and update local storage
-        const watchList = JSON.parse(localStorage.getItem('watchList')) || [];
         if (isInWatchList) {
-            const updatedWatchList = watchList.filter(id => id !== movie.id);
-            localStorage.setItem('watchList', JSON.stringify(updatedWatchList));
+            dispatch(removeFromWatchList(movie.id));
         } else {
-            localStorage.setItem('watchList', JSON.stringify([...watchList, movie.id]));
+            dispatch(addToWatchList(movie.id));
         }
         setIsInWatchList(!isInWatchList);
     };
@@ -60,7 +66,7 @@ function MovieCard({ movie }) {
     // console.log(movie);
 0
     return (
-        <div className="movie-card">
+        <div className={`movie-card ${isHidden ? 'hidden' : ''}`}>
             <img src={getPosterPath()} alt={title} />
             <div className='movie-data'>
                 <h3 className="movie-title">{title}</h3>
@@ -97,6 +103,7 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         vote_average: PropTypes.number.isRequired,
     }).isRequired,
+    hideUnfavorited: PropTypes.bool.isRequired,
 };
 
 export default MovieCard;
