@@ -10,13 +10,13 @@ function PageFavorites() {
   // Corrected the useState hook
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
-  const fetchFavoriteMovies = async () => {
-    const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
-    const favoriteMovies = await Promise.all(favoriteIds.map(fetchMovieDetails));
-    setFavoriteMovies(favoriteMovies.filter(movie => movie && favorites.includes(movie.id)));
-  };
-
   useEffect(() => {
+    const fetchFavoriteMovies = async () => {
+      const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+      const favoriteMovies = await Promise.all(favoriteIds.map(fetchMovieDetails));
+      setFavoriteMovies(favoriteMovies.filter(movie => movie && favorites.includes(movie.id)));
+    };
+
     fetchFavoriteMovies();
   }, [favorites]);
 
@@ -26,7 +26,7 @@ function PageFavorites() {
       <div className="line"></div>
       {favorites.length === 0 ? (
         <div className="empty-favorites-container">
-          <p>You have not added any movies to your Favorites List yet!</p>
+          <p>You haven&apos;t added any movies to your Favorites List yet!</p>
           <div className="favorites-instructions"> 
             Create your Favorites List by clicking the
             <div className="heart favorite"></div>
