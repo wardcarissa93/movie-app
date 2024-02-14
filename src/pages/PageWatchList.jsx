@@ -35,6 +35,7 @@ function PageWatchList() {
       ) : (
         <MovieList movies={watchListMovies} hideUnfavorited={true} />
       )}
+      <div className="line"></div>
     </div>
   );
 }

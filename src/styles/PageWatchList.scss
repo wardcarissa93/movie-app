@@ -7,10 +7,20 @@
         display: flex;
         flex-direction: column;
         margin: 3rem 0;
+        height: 50vh;
+        row-gap: 1rem;
 
         .watchlist-instructions {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 1rem;
+
+            @media (min-width: 540px) {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+            }
 
             .plus-sign {
                 position: relative;

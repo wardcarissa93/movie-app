@@ -27,10 +27,10 @@ function PageFavorites() {
       {favorites.length === 0 ? (
         <div className="empty-favorites-container">
           <p>You haven&apos;t added any movies to your Favorites List yet!</p>
-          <div className="favorites-instructions"> 
-            Create your Favorites List by clicking the
+          <div className="favorites-instructions">
+            <p>Create your Favorites List by clicking the</p> 
             <div className="heart favorite"></div>
-            button by each movie.
+            <p>button by each movie.</p>
           </div>
         </div>
       ) : (
