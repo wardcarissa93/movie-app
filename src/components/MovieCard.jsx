@@ -70,7 +70,10 @@ function MovieCard({ movie, hideUnfavorited }) {
             <img src={getPosterPath()} alt={title} />
             <div className='movie-data'>
                 <h3 className="movie-title">{title}</h3>
-                <p>{overview.substr(0, 65)}... <Link to={`/movie/${id}`}>More Info</Link></p>
+                <p>{overview.substr(0, 65)}...</p>
+                <button className="more-info-button" title="More Info">
+                    <Link to={`/movie/${id}`}>More Info</Link>
+                </button>
                 <div className="release-rating">
                     <div className="release-rating-labels">
                         <p>Released:</p>

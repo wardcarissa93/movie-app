@@ -71,11 +71,13 @@ function MovieDetails({ movie }) {
           <div>
             <p>{overview}</p>
             <div className="release-rating">
-              <div className="release-container">
-                <div>Release Date: </div>
-                <div>{dateFormat(release_date, "mmm dS, yyyy")}</div>
-              </div>
-              <div className='rating-container'><p className="rating-label">Rating: </p><div className="star-container">{generateStars()}</div><p className="rating-label">({(vote_average*10).toFixed(1)}%)</p></div>
+
+                <div className="release-date-label">Release Date: </div>
+                <div className="release-date-data">{dateFormat(release_date, "mmm dS, yyyy")}</div>
+                <p className="rating-label">Rating: </p>
+                <div className="star-container">{generateStars()}</div>
+                <p className="rating-percentage">({(vote_average*10).toFixed(1)}%)</p>
+              <div className='rating-container'></div>
             </div>
           </div>
         </div>

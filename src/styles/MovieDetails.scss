@@ -19,6 +19,7 @@ img {
 #movie-details-wrapper {
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
 
     .favorite-watchlist {
         display: flex;
@@ -102,24 +103,36 @@ img {
         }
     }
 
-    .release-container {
-        display: flex;
-        justify-content: center;
+    .release-rating {
+        display: grid;
+        grid-template-columns: 30% 40% 10%;
+        grid-template-rows: 1fr 1fr;
+        margin-left: 10%;
 
-        &>* {
-            max-width: 30%;
+        .release-date-label {
+            text-align: left;
         }
-    }
 
-    .rating-container {
-        display: flex;
-        justify-content: center;
+        .release-date-data {
+            text-align: right;
+        }
+
+        .rating-label {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 2;
+            grid-row-end: 3;
+        }
 
         .star-container {
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 3;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
-            width: 40%;
+            width: 100%;
 
             .star {
                 margin: 5px 0;
@@ -152,14 +165,32 @@ img {
                 display: block;
                 top: 0.3px;
                 left: -10.5px;
-                width: 0px;
-                height: 0px;
+                width: 0;
+                height: 0;
                 border-right: 10px solid transparent;
                 border-bottom: 7px solid $star-color;
                 border-left: 10px solid transparent;
                 transform: rotate(-70deg);
                 content: '';
             }
+        }
+
+        .rating-percentage {
+            grid-column-start: 3;
+            grid-column-end: 4;
+            grid-row-start: 2;
+            grid-row-end: 3;
+            text-align: left;
+            padding-left: 1rem;
+        }
+    }
+
+    .release-container {
+        display: flex;
+        justify-content: center;
+
+        &>* {
+            max-width: 30%;
         }
     }
 }
