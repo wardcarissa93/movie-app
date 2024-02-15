@@ -8,6 +8,7 @@ footer {
     margin-bottom: 10px;
     gap: 0px;
     max-width: 100vw;
+    background-color: $secondary-color;
 
     // Nested selector for <p> tag inside footer
     p {

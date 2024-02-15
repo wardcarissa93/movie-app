@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import MovieList from '../components/MovieList';
 import { 
   fetchPopularMovies,
@@ -6,15 +7,17 @@ import {
   fetchNowPlayingMovies,
   fetchUpcomingMovies
 } from '../api/movieApi';
+import { setSelectedCategory } from '../features/movies/moviesSlice';
 
 function PageHome() {
   const [movies, setMovies] = useState([]);
-  const [category, setCategory] = useState('popular'); // Default category is popular
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector(state => state.movies.selectedCategory);
 
   useEffect(() => {
     const fetchMoviesData = async () => {
       let fetchedMovies = [];
-      switch (category) {
+      switch (selectedCategory) {
         case 'top_rated':
           fetchedMovies = await fetchTopRatedMovies();
           break;
@@ -36,10 +39,11 @@ function PageHome() {
     };
 
     fetchMoviesData();
-  }, [category]);
+  }, [selectedCategory]);
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    const newCategory = event.target.value;
+    dispatch(setSelectedCategory(newCategory));
   };
 
   return (
@@ -47,7 +51,7 @@ function PageHome() {
       <div id="category-select-form">
         <label htmlFor="categorySelect">
           Display
-          <select id="categorySelect" value={category} onChange={handleCategoryChange}>
+          <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
             <option value="popular">Popular</option>
             <option value="top_rated">Top Rated</option>
             <option value="now_playing">Now Playing</option>
