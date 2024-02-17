@@ -12,23 +12,28 @@ import {
 import "../styles/MovieCard.scss";
 
 function MovieCard({ movie, hideUnfavorited }) {
+    // Redux hooks
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.user.favorites);
     const watchlist = useSelector((state) => state.user.watchlist);
 
+    // State variables
     const [isFavorite, setIsFavorite] = useState(false);
     const [isInWatchList, setIsInWatchList] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
 
+    // Effect to update favorite and watchlist status
     useEffect(() => {
         setIsFavorite(favorites.includes(movie.id));
         setIsInWatchList(watchlist.includes(movie.id));
     }, [favorites, watchlist, movie.id]);
 
+    // Effect to handle visibility based on favorite status
     useEffect(() => {
         setIsHidden(hideUnfavorited && !isFavorite);
     }, [hideUnfavorited, isFavorite])
 
+    // Function to toggle favorite status
     const toggleFavorite = () => {
         if (isFavorite) {
             dispatch(removeFromFavorites(movie.id));
