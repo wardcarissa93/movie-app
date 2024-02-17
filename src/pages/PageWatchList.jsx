@@ -33,7 +33,7 @@ function PageWatchList() {
           </div>
         </div>
       ) : (
-        <MovieList movies={watchListMovies} hideUnfavorited={true} />
+        <MovieList movies={watchListMovies}/>
       )}
       <div className="line"></div>
     </div>

@@ -11,7 +11,7 @@ import {
 } from '../features/user/userSlice';
 import "../styles/MovieCard.scss";
 
-function MovieCard({ movie, hideUnfavorited }) {
+function MovieCard({ movie }) {
     // Redux hooks
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.user.favorites);
@@ -20,18 +20,13 @@ function MovieCard({ movie, hideUnfavorited }) {
     // State variables
     const [isFavorite, setIsFavorite] = useState(false);
     const [isInWatchList, setIsInWatchList] = useState(false);
-    const [isHidden, setIsHidden] = useState(false);
+    // const [isHidden, setIsHidden] = useState(false);
 
     // Effect to update favorite and watchlist status
     useEffect(() => {
         setIsFavorite(favorites.includes(movie.id));
         setIsInWatchList(watchlist.includes(movie.id));
     }, [favorites, watchlist, movie.id]);
-
-    // Effect to handle visibility based on favorite status
-    useEffect(() => {
-        setIsHidden(hideUnfavorited && !isFavorite);
-    }, [hideUnfavorited, isFavorite])
 
     // Function to toggle favorite status
     const toggleFavorite = () => {
@@ -43,6 +38,7 @@ function MovieCard({ movie, hideUnfavorited }) {
         setIsFavorite(!isFavorite);
     };
 
+    // Function to toggle watchlist status
     const toggleWatchList = () => {
         if (isInWatchList) {
             dispatch(removeFromWatchList(movie.id));
@@ -52,7 +48,7 @@ function MovieCard({ movie, hideUnfavorited }) {
         setIsInWatchList(!isInWatchList);
     };
 
-    // Convert the movie's rating to stars
+    // Function to generate star ratings based on vote_average
     const generateStars = () => {
         const numberOfStars = Math.round(movie.vote_average);
         return Array.from({ length: numberOfStars }, (_unused, index) => (
@@ -60,6 +56,7 @@ function MovieCard({ movie, hideUnfavorited }) {
         ));
     };
 
+    // Function to get poster path
     const getPosterPath = () => {
         // Check if poster_path is available, if not use the alternate image
         return movie.poster_path
@@ -67,11 +64,12 @@ function MovieCard({ movie, hideUnfavorited }) {
             : '../../public/images/image-not-found.png'; 
     };
 
+    // Destructure movie object
     const { id, overview, title, release_date } = movie;
-    // console.log(movie);
-0
+
+    // JSX for movie card component
     return (
-        <div className={`movie-card ${isHidden ? 'hidden' : ''}`}>
+        <div className={`movie-card`}>
             <img src={getPosterPath()} alt={title} />
             <div className='movie-data'>
                 <h3 className="movie-title">{title}</h3>
@@ -90,9 +88,11 @@ function MovieCard({ movie, hideUnfavorited }) {
                     </div>
                 </div>
                 <div className="favorite-watchlist">
+                    {/* Favorite button */}
                     <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
                         <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
                     </button>
+                    {/* Watchlist button */}
                     <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
                         <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
                     </button>
@@ -102,6 +102,7 @@ function MovieCard({ movie, hideUnfavorited }) {
     );
 }
 
+// PropTypes for MovieCard component
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -111,7 +112,7 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         vote_average: PropTypes.number.isRequired,
     }).isRequired,
-    hideUnfavorited: PropTypes.bool.isRequired,
 };
 
+// Export MovieCard component
 export default MovieCard;

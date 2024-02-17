@@ -34,7 +34,7 @@ function PageFavorites() {
           </div>
         </div>
       ) : (
-        <MovieList movies={favoriteMovies} hideUnfavorited={true} />
+        <MovieList movies={favoriteMovies}/>
       )}
       <div className="line"></div>
     </div>

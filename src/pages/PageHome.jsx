@@ -61,7 +61,7 @@ function PageHome() {
         </label>
       </div>
       <div className="line"></div>
-      <MovieList movies={movies} hideUnfavorited={false} />
+      <MovieList movies={movies}/>
       <div className="line"></div>
     </div>
   );

@@ -11,18 +11,22 @@ import {
 import "../styles/MovieDetails.scss";
 
 function MovieDetails({ movie }) {
+  // Redux hooks
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.user.favorites);
   const watchlist = useSelector((state) => state.user.watchlist);
 
+  // State variables
   const [isFavorite, setIsFavorite] = useState(false);
   const [isInWatchList, setIsInWatchList] = useState(false);
 
+  // Effect to update favorite and watchlist status
   useEffect(() => {
     setIsFavorite(favorites.includes(movie.id));
     setIsInWatchList(watchlist.includes(movie.id));
   }, [favorites, watchlist, movie.id]);
 
+  // Function to toggle favorite status
   const toggleFavorite = () =>{
     if (isFavorite) {
       dispatch(removeFromFavorites(movie.id));
@@ -32,6 +36,7 @@ function MovieDetails({ movie }) {
     setIsFavorite(!isFavorite);
   };
 
+  // Function to toggle watchlist status
   const toggleWatchList = () => {
     if (isInWatchList) {
       dispatch(removeFromWatchList(movie.id));
@@ -40,6 +45,7 @@ function MovieDetails({ movie }) {
     }
   }
 
+  // Function to generate star ratings based on vote_average
   const generateStars = () => {
     const numberOfStars = Math.round(movie.vote_average);
     return Array.from({ length: numberOfStars }, (_unused, index) => (
@@ -47,8 +53,10 @@ function MovieDetails({ movie }) {
     ));
   };
 
+  // Destructure movie object
   let { title, overview, poster_path, release_date, vote_average } = movie;
 
+  // JSX for movie details component
   return (
     <div id="details-wrapper">
       <h3>Details for <i>{title}</i></h3>
@@ -58,20 +66,23 @@ function MovieDetails({ movie }) {
           <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
         </div>
         <div id="movie-details-data"> 
+          {/* Favorite and Watchlist buttons */}
           <div className="favorite-watchlist">
-              <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
-                  <p className='favorite-label'>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</p>
-                  <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
-              </button>
-              <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
-                  <p className="watch-list-label">{isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}</p>
-                  <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
-              </button>
+            {/* Favorite button */}
+            <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
+                <p className='favorite-label'>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</p>
+                <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
+            </button>
+            {/* Watchlist button */}
+            <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
+                <p className="watch-list-label">{isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}</p>
+                <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
+            </button>
           </div>
           <div>
             <p>{overview}</p>
+            {/* Release date and rating */}
             <div className="release-rating">
-
                 <div className="release-date-label">Release Date: </div>
                 <div className="release-date-data">{dateFormat(release_date, "mmm dS, yyyy")}</div>
                 <p className="rating-label">Rating: </p>
@@ -87,6 +98,7 @@ function MovieDetails({ movie }) {
   );
 }
 
+// PropTypes for MovieDetails component
 MovieDetails.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -95,8 +107,8 @@ MovieDetails.propTypes = {
     poster_path: PropTypes.string.isRequired,
     release_date: PropTypes.string.isRequired,
     vote_average: PropTypes.number.isRequired,
-    // Add other necessary properties
   }).isRequired,
 };
 
+// Export MovieDetails component
 export default MovieDetails;
