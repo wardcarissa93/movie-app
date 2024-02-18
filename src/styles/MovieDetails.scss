@@ -1,14 +1,18 @@
+// Importing variables
 @use 'variables' as *;
 
+// Styling for images
 img {
     max-width: 80%;
     margin: 0;
 }
 
+// Styling for rating label
 .rating-label {
     max-width: 15%;
 }
 
+// Styling for a horizontal line
 .line {
     width: 95%;
     height: 0.125rem;
@@ -16,15 +20,18 @@ img {
     margin: 1rem auto;
 }
 
+// Styling for the wrapper of movie details
 #movie-details-wrapper {
     display: flex;
     flex-direction: column;
     padding: 0 1rem;
 
+    // Styling for the favorite and watchlist section
     .favorite-watchlist {
         display: flex;
         justify-content: space-evenly;
 
+        // Styling for buttons
         button {
             width: 50%;
             height: 15%;
@@ -35,23 +42,28 @@ img {
             background-color: transparent;
             font-size: 10pt;
 
+            // Button hover state
             &:hover {
-                border: 1px solid $primary-color;
+                border: 1px solid $primary-color; // Using primary color variable
             }
 
+            // Styling for favorite label
             p.favorite-label {
                 margin: 0.25rem 1rem;
             }
 
+            // Styling for watchlist label
             p.watch-list-label {
                 margin: 0.25rem 1rem;
             }
 
+            // Styling for heart icon
             .heart {
                 position: relative;
                 width: 20px;
                 height: 18px;
 
+                // Heart line styling
                 &:before, &:after {
                     position: absolute;
                     content: '';
@@ -59,7 +71,7 @@ img {
                     top: 0;
                     width: 10.4px;
                     height: 16px;
-                    background-color: $unselected-color;
+                    background-color: $unselected-color; // Using unselected color variable
                     border-radius: 5px 5px 0 0;
                     transform: rotate(-50deg);
                     transform-origin: 50% 75%;
@@ -70,22 +82,24 @@ img {
                 }
 
                 &.favorite:before, &.favorite:after {
-                    background-color: $heart-color;
+                    background-color: $heart-color; // Using heart color variable
                 }
             }
 
+            // Styling for plus sign icon
             .plus-sign {
                 position: relative;
                 width: 20px;
                 height: 18px;
                 padding-bottom: 0.5rem;
 
+                // Plus sign line styling
                 &:before, &:after {
                     position: absolute;
                     content: '';
                     width: 20px;
                     height: 5px;
-                    background-color: $unselected-color;
+                    background-color: $unselected-color; // Using unselected color variable
                 }
 
                 &:before {
@@ -96,27 +110,32 @@ img {
                     transform: rotate(90deg) translate(10px, 0);
                 }
 
+                // Plus sign color
                 &.watchlist:before, &.watchlist:after {
-                    background-color: $plus-sign-color;
+                    background-color: $plus-sign-color; // Using plus sign color variable
                 }
             }
         }
     }
 
+    // Styling for release date and rating section
     .release-rating {
         display: grid;
         grid-template-columns: 30% 40% 10%;
         grid-template-rows: 1fr 1fr;
         margin-left: 10%;
 
+        // Styling for release date label
         .release-date-label {
             text-align: left;
         }
 
+        // Styling for release date data
         .release-date-data {
             text-align: right;
         }
 
+        // Styling for rating label
         .rating-label {
             grid-column-start: 1;
             grid-column-end: 2;
@@ -124,6 +143,7 @@ img {
             grid-row-end: 3;
         }
 
+        // Styling for star container
         .star-container {
             grid-column-start: 2;
             grid-column-end: 3;
@@ -134,6 +154,7 @@ img {
             align-items: center;
             width: 100%;
 
+            // Styling for star icon
             .star {
                 margin: 5px 0;
                 position: relative;
@@ -141,13 +162,14 @@ img {
                 width: 0px;
                 height: 0px;
                 border-right: 10px solid transparent;
-                border-bottom: 7px solid $star-color;
+                border-bottom: 7px solid $star-color; // Using star color variable
                 border-left: 10px solid transparent;
                 transform: rotate(35deg);
             }
 
+            // Styling for star icon pseudo-elements
             .star:before {
-                border-bottom: 8px solid $star-color;
+                border-bottom: 8px solid $star-color; // Using star color variable
                 border-left: 3px solid transparent;
                 border-right: 3px solid transparent;
                 position: absolute;
@@ -168,13 +190,14 @@ img {
                 width: 0;
                 height: 0;
                 border-right: 10px solid transparent;
-                border-bottom: 7px solid $star-color;
+                border-bottom: 7px solid $star-color; // Using star color variable
                 border-left: 10px solid transparent;
                 transform: rotate(-70deg);
                 content: '';
             }
         }
 
+        // Styling for rating percentage
         .rating-percentage {
             grid-column-start: 3;
             grid-column-end: 4;
@@ -185,20 +208,24 @@ img {
         }
     }
 
+    // Styling for release container
     .release-container {
         display: flex;
         justify-content: center;
 
+        // Styling for child elements
         &>* {
             max-width: 30%;
         }
     }
 }
 
+// Media query for screens larger than 768px
 @media (min-width: 768px) {
     #movie-details-wrapper {
         flex-direction: row;
 
+        // Styling for movie details data
         #movie-details-data {
             display: flex;
             flex-direction: column;
@@ -213,6 +240,7 @@ img {
     }
 }
 
+// Media query for screens larger than 960px
 @media (min-width: 960px) {
     #details-wrapper {
         margin-top: 7rem;

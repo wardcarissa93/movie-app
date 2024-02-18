@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import "../styles/HeaderNav.scss";
 
 const HeaderNav = () => {
+  // State to manage menu open/close
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Effect to close menu on window resize if menu is open
   useEffect(() => {
     const handleResize = () => {
       if (isMenuOpen && window.innerWidth >= 960) {
@@ -19,6 +21,7 @@ const HeaderNav = () => {
     };
   }, [isMenuOpen]);
 
+  // Effect to handle body scroll when menu is open/closed
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add("no-scroll");
@@ -31,18 +34,22 @@ const HeaderNav = () => {
     };
   }, [isMenuOpen]);
 
+  // Function to toggle menu state
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Function to close menu
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
+  // JSX for header/navigation component
   return (
     <header
       className={`${isMenuOpen ? "expanded" : ""}`}
     >
+      {/* Hamburger menu button */}
       <button
         className={`hamburger-menu ${isMenuOpen ? "open" : ""}`}
         onClick={toggleMenu}
@@ -54,11 +61,16 @@ const HeaderNav = () => {
           <span className="bar" id="bar3"></span>
         </span>
       </button>
+
+      {/* Site logo */}
       <Link className={`logo ${isMenuOpen ? "hide" : ""}`} to={'/'} title="Return to Home">
         <img src="images/logo.svg" alt="site-logo"></img>
       </Link>
+
+      {/* Main navigation */}
       <nav id="main-navigation" className={isMenuOpen ? "show" : ""}>
         <ul>
+          {/* Home link */}
           <li className="main-navigation-li">
             <Link
               className="main-navigation-link"
@@ -68,6 +80,8 @@ const HeaderNav = () => {
               Home
             </Link>
           </li>
+
+          {/* About link */}
           <li className="main-navigation-li">
             <Link
               className="main-navigation-link"
@@ -77,6 +91,8 @@ const HeaderNav = () => {
               About
             </Link>
           </li>
+
+          {/* Favorites link */}
           <li className="main-navigation-li">
             <Link
               className="main-navigation-link"
@@ -86,6 +102,8 @@ const HeaderNav = () => {
               Favorites
             </Link>
           </li>
+
+          {/* Watch List link */}
           <li className="main-navigation-li">
             <Link
               className="main-navigation-link"
@@ -101,4 +119,5 @@ const HeaderNav = () => {
   );
 };
 
+// Export HeaderNav component
 export default HeaderNav;
