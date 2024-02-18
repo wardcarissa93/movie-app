@@ -23,6 +23,7 @@ function PageHome() {
   const [movies, setMovies] = useState([]); // State variable to store fetched movies
   const dispatch = useDispatch(); // useDispatch hook for dispatching actions
   const selectedCategory = useSelector(state => state.movies.selectedCategory); // Getting selected category from Redux store
+  const [favoriteMessage, setFavoriteMessage] = useState(''); // State variable for favorite message
 
   // Fetching movies data based on selected category when the component mounts or when selectedCategory changes
   useEffect(() => {
@@ -56,6 +57,15 @@ function PageHome() {
   const handleCategoryChange = (event) => {
     const newCategory = event.target.value; // Getting new category from select input
     dispatch(setSelectedCategory(newCategory)); // Dispatching action to set selected category
+    setFavoriteMessage(''); // Clearing favorite message
+  };
+
+  // Function to handle adding a movie to favorites
+  const addToFavorites = (title) => {
+    setFavoriteMessage(`'${title}' added to Favorites`);
+    setTimeout(() => {
+      setFavoriteMessage('');
+    }, 3000);
   };
 
   return (
@@ -71,9 +81,12 @@ function PageHome() {
           </select>
           movies:
         </label>
+          <div id="message">
+            {favoriteMessage ? favoriteMessage : ''}
+          </div>
       </div>
       <div className="line"></div> {/* Horizontal line separator */}
-      <MovieList movies={movies}/> {/* Rendering MovieList component with fetched movies */}
+      <MovieList movies={movies} addToFavorites={addToFavorites}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
   );

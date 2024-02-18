@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 // Import the SCSS file for styling
 import '../styles/PageFavorites.scss';
 
+
 // PageFavorites component definition
 function PageFavorites() {
   // Getting favorite movies from Redux store

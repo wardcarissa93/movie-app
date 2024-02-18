@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "../styles/HeaderNav.scss";
 
+
+// HeaderNav component definition
 const HeaderNav = () => {
   // State to manage menu open/close
   const [isMenuOpen, setIsMenuOpen] = useState(false);

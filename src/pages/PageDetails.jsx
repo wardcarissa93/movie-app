@@ -10,6 +10,7 @@ import MovieDetails from '../components/MovieDetails';
 // Import the fetchMovieDetails function from movieApi file
 import { fetchMovieDetails } from '../api/movieApi';
 
+
 // PageDetails component definition
 function PageDetails() {
   // Fetch movie details using movie ID from URL params

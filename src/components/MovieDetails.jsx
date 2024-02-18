@@ -10,6 +10,7 @@ import { useMovieStatus, generateStars, getPosterPath } from '../utilities/useMo
 // Import the SCSS file for styling
 import "../styles/MovieDetails.scss";
 
+
 // MovieDetails component definition
 function MovieDetails({ movie }) {
     // Destructuring movie object

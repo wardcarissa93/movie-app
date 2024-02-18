@@ -10,25 +10,34 @@ import { Link } from 'react-router-dom';
 // Import utility functions
 import { useMovieStatus, generateStars, getPosterPath } from '../utilities/useMovieStatus';
 
-// Importing the SCSS file for styling
-import "../styles/MovieCard.scss";
+// Import the SCSS file for styling
+import '../styles/MovieCard.scss';
+
 
 // MovieCard component definition
-function MovieCard({ movie }) {
+function MovieCard({ movie, addToFavorites }) {
     // Destructuring movie object
-    const { id, overview, title, release_date, vote_average } = movie;
+    const { id, overview, title, release_date, vote_average, poster_path } = movie;
 
     // Custom hook to manage movie status (favorite, watchlist)
     const { isFavorite, isInWatchList, toggleFavorite, toggleWatchList } = useMovieStatus(id);
 
+    const handleToggleFavorite = () => {
+        toggleFavorite();
+        addToFavorites(title);
+    };
+
     return (
-        <div className={`movie-card`}> {/* Container for individual movie card */}
-            <img src={getPosterPath(movie.poster_path)} alt={title} /> {/* Movie poster */}
-            <div className='movie-data'> {/* Container for movie data j*/}
-                <h3 className="movie-title">{title}</h3> {/* Movie title */}
+        <div className="movie-card"> {/* Container for individual movie card */}
+            <img src={getPosterPath(poster_path)} alt={title} /> {/* Movie poster */}
+            <div className="movie-data"> {/* Container for movie data */}
+                <h3 className="movie-title">{title}</h3> {/* Movie title*/}
                 <p>{overview.substr(0, 65)}...</p> {/* Movie overview */}
-                <button className="more-info-button" title="More Info">
-                    <Link to={`/movie/${id}`}>More Info</Link> {/* Button for more info/link to movie details page */}
+                <button
+                    className="more-info-button"
+                    title="More Info"
+                >
+                    <Link to={`/movie/${id}`}>More Info</Link> {/* Button for more info/link to movie details page*/}
                 </button>
                 <div className="release-rating"> {/* Container for release date and rating */}
                     <div className="release-rating-labels"> {/* Labels for release date and rating */}
@@ -41,10 +50,14 @@ function MovieCard({ movie }) {
                     </div>
                 </div>
                 <div className="favorite-watchlist"> {/* Container for favorite and watchlist buttons */}
-                    <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}> {/* Button for favorite */}
+                    <button onClick={handleToggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}> {/* Button for favorite */}
                         <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div> {/* Heart icon */}
                     </button>
-                    <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button"> {/* Button for watch list*/}
+                    <button 
+                        onClick={toggleWatchList} 
+                        title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}
+                        className="plus-sign-button"
+                    > {/* Button for watch list */}
                         <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div> {/* Plus sign icon */}
                     </button>
                 </div>
@@ -63,6 +76,7 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired, // 'release_date' is required and must be a string
         vote_average: PropTypes.number.isRequired, // 'vote_average' is required and must be a number
     }).isRequired, // 'movie' prop is required
+    addToFavorites: PropTypes.func.isRequired, // 'addToFavorites' function is required
 };
 
 // Export the MovieCard component

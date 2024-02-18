@@ -1,5 +1,6 @@
 import About from '../components/About'; // Importing the About component
 
+
 // PageAbout component definition
 function PageAbout() {
   return (

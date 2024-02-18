@@ -59,7 +59,10 @@ div {
 }
 
 #category-select-form {
-  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
+  justify-content: space-around;
 }
 
 #categorySelect {
@@ -70,6 +73,10 @@ div {
 
 #categorySelect:hover {
   background-color: #bbbbbb;
+}
+
+#message {
+  height: 1rem;
 }
 
 @media (min-width: 960px) {

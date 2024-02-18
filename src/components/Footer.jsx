@@ -4,6 +4,8 @@ import packageJson from '../../package.json';
 // Import SCSS styles for the Footer component
 import '../styles/Footer.scss';
 
+
+// Footer component definition
 function Footer () {
     // Getting the current year
     const currentYear = new Date().getFullYear();

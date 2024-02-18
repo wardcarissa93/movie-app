@@ -7,13 +7,14 @@ import MovieCard from './MovieCard';
 // Import the SCSS file for styling
 import "../styles/MovieList.scss";
 
+
 // MovieList component definition
-function MovieList({ movies }) {
+function MovieList({ movies, addToFavorites }) {
     // Rendering the list of movies using MovieCard component
     return (
         <div id="movie-list">
             {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard key={movie.id} movie={movie} addToFavorites={addToFavorites}/>
             ))}
         </div>
     );
@@ -26,6 +27,7 @@ MovieList.propTypes = {
            id: PropTypes.number.isRequired // 'id' is required and must be a number
         })
     ).isRequired,
+    addToFavorites: PropTypes.func.isRequired, // 'addToFavorites' function is required
 };
 
 // Export the MovieList component

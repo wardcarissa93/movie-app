@@ -1,6 +1,7 @@
 // Import the SCSS file for styling
 import "../styles/About.scss";
 
+
 // About component definition
 function About() {
   return (

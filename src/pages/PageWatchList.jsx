@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 // Import the SCSS file for styling
 import '../styles/PageWatchList.scss';
 
+
 // PageWatchList component definition
 function PageWatchList() {
   const watchList = useSelector((state) => state.user.watchlist); // Getting watchlist movies from Redux store
