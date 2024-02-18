@@ -1,100 +1,51 @@
-import { useState, useEffect } from 'react';
+// Import the dateformat library for date formatting
 import dateFormat from 'dateformat';
+
+// Import PropTypes library for type-checking
 import PropTypes from 'prop-types';
+
+// Import Link component from react-router-dom
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    addToFavorites,
-    removeFromFavorites,
-    addToWatchList,
-    removeFromWatchList
-} from '../features/user/userSlice';
+
+// Import utility functions
+import { useMovieStatus, generateStars, getPosterPath } from '../utilities/useMovieStatus';
+
+// Importing the SCSS file for styling
 import "../styles/MovieCard.scss";
 
+// MovieCard component definition
 function MovieCard({ movie }) {
-    // Redux hooks
-    const dispatch = useDispatch();
-    const favorites = useSelector((state) => state.user.favorites);
-    const watchlist = useSelector((state) => state.user.watchlist);
+    // Destructuring movie object
+    const { id, overview, title, release_date, vote_average } = movie;
 
-    // State variables
-    const [isFavorite, setIsFavorite] = useState(false);
-    const [isInWatchList, setIsInWatchList] = useState(false);
-    // const [isHidden, setIsHidden] = useState(false);
+    // Custom hook to manage movie status (favorite, watchlist)
+    const { isFavorite, isInWatchList, toggleFavorite, toggleWatchList } = useMovieStatus(id);
 
-    // Effect to update favorite and watchlist status
-    useEffect(() => {
-        setIsFavorite(favorites.includes(movie.id));
-        setIsInWatchList(watchlist.includes(movie.id));
-    }, [favorites, watchlist, movie.id]);
-
-    // Function to toggle favorite status
-    const toggleFavorite = () => {
-        if (isFavorite) {
-            dispatch(removeFromFavorites(movie.id));
-        } else {
-            dispatch(addToFavorites(movie.id));
-        }
-        setIsFavorite(!isFavorite);
-    };
-
-    // Function to toggle watchlist status
-    const toggleWatchList = () => {
-        if (isInWatchList) {
-            dispatch(removeFromWatchList(movie.id));
-        } else {
-            dispatch(addToWatchList(movie.id));
-        }
-        setIsInWatchList(!isInWatchList);
-    };
-
-    // Function to generate star ratings based on vote_average
-    const generateStars = () => {
-        const numberOfStars = Math.round(movie.vote_average);
-        return Array.from({ length: numberOfStars }, (_unused, index) => (
-            <div key={index} className="star"></div>
-        ));
-    };
-
-    // Function to get poster path
-    const getPosterPath = () => {
-        // Check if poster_path is available, if not use the alternate image
-        return movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : '../../public/images/image-not-found.png'; 
-    };
-
-    // Destructure movie object
-    const { id, overview, title, release_date } = movie;
-
-    // JSX for movie card component
     return (
-        <div className={`movie-card`}>
-            <img src={getPosterPath()} alt={title} />
-            <div className='movie-data'>
-                <h3 className="movie-title">{title}</h3>
-                <p>{overview.substr(0, 65)}...</p>
+        <div className={`movie-card`}> {/* Container for individual movie card */}
+            <img src={getPosterPath(movie.poster_path)} alt={title} /> {/* Movie poster */}
+            <div className='movie-data'> {/* Container for movie data j*/}
+                <h3 className="movie-title">{title}</h3> {/* Movie title */}
+                <p>{overview.substr(0, 65)}...</p> {/* Movie overview */}
                 <button className="more-info-button" title="More Info">
-                    <Link to={`/movie/${id}`}>More Info</Link>
+                    <Link to={`/movie/${id}`}>More Info</Link> {/* Button for more info/link to movie details page */}
                 </button>
-                <div className="release-rating">
-                    <div className="release-rating-labels">
-                        <p>Released:</p>
-                        <p>Rating:</p>
+                <div className="release-rating"> {/* Container for release date and rating */}
+                    <div className="release-rating-labels"> {/* Labels for release date and rating */}
+                        <p>Released:</p> {/* Label for release date */}
+                        <p>Rating:</p> {/* Label for rating */}
                     </div>
-                    <div className="release-rating-values">
-                        <p>{dateFormat(release_date, "mmm dS, yyyy")}</p>
-                        <div className="star-container">{generateStars()}</div>
+                    <div className="release-rating-values"> {/* Values for release date and rating */}
+                        <p>{dateFormat(release_date, "mmm dS, yyyy")}</p> {/* Formatted release date */}
+                        <div className="star-container">{generateStars(vote_average)}</div> {/* Star rating */}
                     </div>
                 </div>
-                <div className="favorite-watchlist">
-                    {/* Favorite button */}
-                    <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}>
-                        <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div>
+                <div className="favorite-watchlist"> {/* Container for favorite and watchlist buttons */}
+                    <button onClick={toggleFavorite} title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}> {/* Button for favorite */}
+                        <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div> {/* Heart icon */}
                     </button>
-                    {/* Watchlist button */}
-                    <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button">
-                        <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div>
+                    <button onClick={toggleWatchList} title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'} className="plus-sign-button"> {/* Button for watch list*/}
+                        <div className={`plus-sign ${isInWatchList ? 'watchlist' : ''}`}></div> {/* Plus sign icon */}
                     </button>
                 </div>
             </div>
@@ -102,17 +53,17 @@ function MovieCard({ movie }) {
     );
 }
 
-// PropTypes for MovieCard component
+// PropTypes validation for the 'movie' prop
 MovieCard.propTypes = {
     movie: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        overview: PropTypes.string.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        release_date: PropTypes.string.isRequired,
-        vote_average: PropTypes.number.isRequired,
-    }).isRequired,
+        id: PropTypes.number.isRequired, // 'id' is required and must be a number
+        overview: PropTypes.string.isRequired, // 'overview' is required and must be a string
+        poster_path: PropTypes.string.isRequired, // 'poster_path' is required and must be a string
+        title: PropTypes.string.isRequired, // 'title' is required and must be a string
+        release_date: PropTypes.string.isRequired, // 'release_date' is required and must be a string
+        vote_average: PropTypes.number.isRequired, // 'vote_average' is required and must be a number
+    }).isRequired, // 'movie' prop is required
 };
 
-// Export MovieCard component
+// Export the MovieCard component
 export default MovieCard;

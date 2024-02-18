@@ -68,6 +68,10 @@ div {
   color: #0a1045;
 }
 
+#categorySelect:hover {
+  background-color: #bbbbbb;
+}
+
 @media (min-width: 960px) {
   #page-home {
     margin-top: 7rem;

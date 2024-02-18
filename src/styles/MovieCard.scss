@@ -1,5 +1,7 @@
+// Importing variables
 @use 'variables' as *;
 
+// Styling for the movie card container
 .movie-card {
     padding: 2.5% 0;
     display: flex;
@@ -8,10 +10,12 @@
     align-items: center;
     min-width: 345px;
 
+    // Styling for the movie poster image
     img {
         width: 85%;
     }
 
+    // Styling for the movie data section
     .movie-data {
         width: 55%;
 
@@ -23,20 +27,30 @@
             margin: 0;
         }
 
+        // Styling for the movie title
         .movie-title {
             font-weight: bold;
             font-size: px;
         }
 
+        // Styling for the more info button
         .more-info-button {
             background-color: $tertiary-color;
             font-size: 12px;
+            height: 2rem;
+            border: 2px solid $primary-color;
+            border-radius: 1rem;
             
             &>* {
                 color: $primary-color;
             }
+
+            &:hover {
+                background-color: $unselected-color;
+            }
         }
 
+        // Styling for the release date and rating section
         .release-rating {
             display: flex;
             max-width: 18.5rem;
@@ -50,20 +64,18 @@
                 }
             }
 
+            // Styling for the release date and rating labels
             .release-rating-labels {
                 align-items: flex-start;;
             }
 
+            // Styling for the release date values and star rating
             .release-rating-values {
                 align-items: flex-end;
-
-                .star-container {
-                    display: flex;
-                    justify-content: flex-end;
-                }
             }
         }
 
+        // Styling for the favorite and watchlist buttons
         .favorite-watchlist {
             display: flex;
             justify-content: space-evenly;
@@ -82,6 +94,7 @@
                     padding-top: 3px;
                 }
 
+                // Styling for the heart icon
                 .heart {
                     position: relative;
                     width: 20px;
@@ -109,6 +122,7 @@
                     }
                 }
                 
+                // Styling for the plus sign icon
                 .plus-sign {
                     position: relative;
                     width: 20px;
@@ -137,14 +151,16 @@
             }
         }
 
+        // Styling for the star container
         .star-container {
             margin-top: 0.25rem;
+            display: flex;
+            justify-content: flex-end;
 
             .star {
                 margin: 5px 0;
                 position: relative;
                 display: block;
-                // background-color: $star-color;
                 width: 0px;
                 height: 0px;
                 border-right: 10px solid transparent;
@@ -170,7 +186,6 @@
             .star:after {
                 position: absolute;
                 display: block;
-                // background-color: $star-color;
                 top: 0.3px;
                 left: -10.5px;
                 width: 0px;
@@ -185,6 +200,7 @@
     }
 }
 
+// Media queries for different screen sizes
 @media (min-width: 400px) {
     .movie-card {
         flex-direction: row;
