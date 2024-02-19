@@ -12,14 +12,19 @@ import {
   fetchPopularMovies,
   fetchTopRatedMovies,
   fetchNowPlayingMovies,
-  fetchUpcomingMovies
+  fetchUpcomingMovies,
+  fetchSearchedMovies
 } from '../api/movieApi';
 
 // Importing action creator for setting selected category
 import { setSelectedCategory } from '../features/movies/moviesSlice';
 
+import "../styles/Homepage.scss";
+
+
 // PageHome component definition
 function PageHome() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]); // State variable to store fetched movies
   const dispatch = useDispatch(); // useDispatch hook for dispatching actions
   const selectedCategory = useSelector(state => state.movies.selectedCategory); // Getting selected category from Redux store
@@ -58,20 +63,63 @@ function PageHome() {
     dispatch(setSelectedCategory(newCategory)); // Dispatching action to set selected category
   };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Fetch movies directly when search form is submitted
+    let fetchedMovies = await fetchSearchedMovies(searchQuery);
+  
+    // Limit the number of movies to 12
+    const limitedMovies = fetchedMovies.slice(0, 12);
+  
+    // Update the movies state
+    setMovies(limitedMovies);
+  
+    // Update the category to 'search'
+    setSearchQuery('');
+  };
+
+
   return (
     <div id="page-home"> {/* Container for the home page */}
-      <div id="category-select-form"> {/* Form for selecting movie category */}
-        <label htmlFor="categorySelect">
-          Display
-          <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
-            <option value="popular">Popular</option>
-            <option value="top_rated">Top Rated</option>
-            <option value="now_playing">Now Playing</option>
-            <option value="upcoming">Upcoming</option>
-          </select>
-          movies:
-        </label>
-      </div>
+      <div id = "page-home-div" style={{ display: 'flex' }}>
+
+        <div id="category-select-form"> {/* Form for selecting movie category */}
+          <label htmlFor="categorySelect">
+            Display
+            <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
+              <option value="popular">Popular</option>
+              <option value="top_rated">Top Rated</option>
+              <option value="now_playing">Now Playing</option>
+              <option value="upcoming">Upcoming</option>
+            </select>
+            movies:
+          </label>
+        </div>
+
+        <div id="search-form" style={{ padding: '1.5rem' }}>
+          <form method="GET" onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              id="search"
+              name="q"
+              placeholder='Search for movies, TV shows'
+              required
+              value={searchQuery}
+              onChange={handleSearchChange}
+              style={{ marginRight: '8px' , width: '200px', backgroundColor: '#c4f5fc'}}
+            />
+            <button type="submit" style={{ backgroundColor:'#c4f5fc', color: 'black', fontSize:'12px',height: '2rem', border: '2px solid #0a1045', borderRadius: '1rem'}}>Search</button>
+
+          </form>
+        </div>    
+      </div>    
+
+
       <div className="line"></div> {/* Horizontal line separator */}
       <MovieList movies={movies}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}
