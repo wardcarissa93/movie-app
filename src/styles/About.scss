@@ -1,5 +1,31 @@
+@use 'variables' as *;
+#aboutDiv{
+    text-align: left;
+    margin-right: 150px;
+    margin-left: 50px;
+
+}
+#aboutDiv h2{
+    margin-top: 60px;
+
+}
+#aboutDiv h3{
+    color: $primary-color;
+    font-weight: bold;
+}
+.about-container{
+    display: flex;
+    gap:70px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 @media (min-width: 960px) {
+    #aboutDiv h2{
+        margin-top: 160px;
+    }
     .about-container {
-        margin-top: 7rem;
+        // margin-top: 7rem;
+        flex-direction: row;
     }
 }
