@@ -1,12 +1,14 @@
 @use 'variables' as *;
 #aboutDiv{
     text-align: left;
-    margin-right: 150px;
-    margin-left: 50px;
+    // margin-right: 200px;
+    // margin-left: 100px;
 
 }
 #aboutDiv h2{
     margin-top: 140px;
+    text-align: center;
+
 
 }
 #aboutDiv h3{
@@ -14,14 +16,15 @@
     font-weight: bold;
 }
 .about-container{
-    display: flex;
-    gap:70px;
-    flex-direction: column;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 50px;
+    padding: 50px;
 }
 
 @media (min-width: 640px) {
     .about-container {
-        flex-direction: row;
+       display: grid;
+        grid-template-columns: repeat(2, 45%);
     }
 }

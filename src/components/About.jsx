@@ -14,10 +14,12 @@ function About() {
     
     <div id = "aboutDiv">
       <h2>Welcome to Film Finder</h2>
+      <div className="line"></div>
+
       <div className="about-container">
         <section>
           <h3>About the Project</h3>
-          <p>Film Finder is a Movie Database where films are categorized by popularity, 
+          <p>Film Finder is a movie app created for educational use. It is a database where films are categorized by popularity, 
             rating, and release date. Explore to find your preferred movie, include it 
             in your Favorites, and store it for later viewing in the Watch Later list!
           </p>
@@ -37,7 +39,10 @@ function About() {
           </p>
         </section>
       </div>
+      <div className="line"></div>
+
     </div>
+
     
   );
 }
