@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MovieList from '../components/MovieList';
 
 // Importing fetch functions for movie categories from movieApi file
-import {
+import { 
   fetchPopularMovies,
   fetchTopRatedMovies,
   fetchNowPlayingMovies,
@@ -18,13 +18,12 @@ import {
 // Importing action creator for setting selected category
 import { setSelectedCategory } from '../features/movies/moviesSlice';
 
-
 // PageHome component definition
 function PageHome() {
   const [movies, setMovies] = useState([]); // State variable to store fetched movies
   const dispatch = useDispatch(); // useDispatch hook for dispatching actions
   const selectedCategory = useSelector(state => state.movies.selectedCategory); // Getting selected category from Redux store
-  const [favoriteMessage, setFavoriteMessage] = useState(''); // State variable for favorite message
+  const [message, setMessage] = useState(''); // State variable for messages
 
   // Fetching movies data based on selected category when the component mounts or when selectedCategory changes
   useEffect(() => {
@@ -35,7 +34,7 @@ function PageHome() {
           fetchedMovies = await fetchTopRatedMovies(); // Fetching top-rated movies
           break;
         case 'now_playing':
-          fetchedMovies = await fetchNowPlayingMovies(); // Fetching now playing movies
+          fetchedMovies = await fetchNowPlayingMovies(); // Fetching now-playing movies
           break;
         case 'upcoming':
           fetchedMovies = await fetchUpcomingMovies(); // Fetching upcoming movies
@@ -47,9 +46,9 @@ function PageHome() {
 
       // Limit the number of movies to 12
       const limitedMovies = fetchedMovies.slice(0, 12);
-
+      
       setMovies(limitedMovies); // Updating movies state with fetched movies
-    }
+    };
 
     fetchMoviesData(); // Calling fetchMoviesData function
   }, [selectedCategory]); // Dependency array with selectedCategory, so useEffect runs when selectedCategory changes
@@ -58,18 +57,18 @@ function PageHome() {
   const handleCategoryChange = (event) => {
     const newCategory = event.target.value; // Getting new category from select input
     dispatch(setSelectedCategory(newCategory)); // Dispatching action to set selected category
-    setFavoriteMessage(''); // Clearing favorite message
+    setMessage(''); // Clearing message
   };
 
-  // Function to handle adding or removing a movie from favorites
-  const handleFavorite = (title, isAdding) => {
+  // Function to handle adding or removing a movie from favorites/watchlist
+  const handleListAction = (title, isAdding, listName) => {
     if (isAdding) {
-      setFavoriteMessage(`'${title}' added to Favorites`);
+      setMessage(`'${title}' added to ${listName}`);
     } else {
-      setFavoriteMessage(`'${title}' removed from Favorites`);
+      setMessage(`'${title}' removed from ${listName}`);
     }
     setTimeout(() => {
-      setFavoriteMessage('');
+      setMessage('');
     }, 3000);
   };
 
@@ -87,11 +86,11 @@ function PageHome() {
           movies:
         </label>
         <div id="message">
-          {favoriteMessage && <span>{favoriteMessage}</span>}
+          {message && <span>{message}</span>}
         </div>
       </div>
       <div className="line"></div> {/* Horizontal line separator */}
-      <MovieList movies={movies} addToFavorites={handleFavorite}/> {/* Rendering MovieList component with fetched movies */}
+      <MovieList movies={movies} handleListAction={handleListAction}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
   );

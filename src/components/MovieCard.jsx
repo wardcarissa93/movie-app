@@ -15,16 +15,23 @@ import '../styles/MovieCard.scss';
 
 
 // MovieCard component definition
-function MovieCard({ movie, addToFavorites }) {
+function MovieCard({ movie, handleListAction }) {
     // Destructuring movie object
     const { id, overview, title, release_date, vote_average, poster_path } = movie;
 
     // Custom hook to manage movie status (favorite, watchlist)
     const { isFavorite, isInWatchList, toggleFavorite, toggleWatchList } = useMovieStatus(id);
 
+    // Function to handle toggling favorite or watchlist status
     const handleToggleFavorite = () => {
         toggleFavorite();
-        addToFavorites(title, !isFavorite); // Pass a boolean indicating whether the movie is being added or removed from favorites
+        handleListAction(title, !isFavorite, 'Favorites'); // Pass a boolean indicating whether the movie is being added or removed from favorites
+    };
+
+    // Function to handle toggling favorite or watchlist status
+    const handleToggleWatchlist = () => {
+        toggleWatchList();
+        handleListAction(title, !isInWatchList, 'Watch List'); // Pass a boolean indicating whether the movie is being added or removed from watchlist
     };
 
     return (
@@ -54,7 +61,7 @@ function MovieCard({ movie, addToFavorites }) {
                         <div className={`heart ${isFavorite ? 'favorite' : ''}`}></div> {/* Heart icon */}
                     </button>
                     <button 
-                        onClick={toggleWatchList} 
+                        onClick={handleToggleWatchlist} 
                         title={isInWatchList ? 'Remove from Watch List' : 'Add to Watch List'}
                         className="plus-sign-button"
                     > {/* Button for watch list */}
@@ -76,7 +83,7 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired, // 'release_date' is required and must be a string
         vote_average: PropTypes.number.isRequired, // 'vote_average' is required and must be a number
     }).isRequired, // 'movie' prop is required
-    addToFavorites: PropTypes.func.isRequired, // 'addToFavorites' function is required
+    handleListAction: PropTypes.func.isRequired, // 'handleListAction' function is required
 };
 
 // Export the MovieCard component
