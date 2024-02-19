@@ -24,7 +24,7 @@ function About() {
           <p>☆ This product uses the <a href="https://www.themoviedb.org/" target="_blank">TMDb API</a> but is not endorsed or certified by TMDb.</p>
           <div>
             <a href="https://www.themoviedb.org/" target="_blank">
-              <img src="images/TMDb.png" style={{ width: '10%' }} alt="TMDb Logo"/>
+              <img src="images/TMDb.png" style={{ width: '170px' }} alt="TMDb Logo"/>
             </a>
           </div>
         </section>
