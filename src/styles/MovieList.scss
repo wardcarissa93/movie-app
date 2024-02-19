@@ -1,22 +1,19 @@
+// Styling for movie list container
 #movie-list {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 100%; // Initially one column for smaller screens
 }
 
-@media (min-width: 768px) {
+// Media query for screens larger than 820px
+@media (min-width: 820px) {
     #movie-list {
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 50% 50%; // Two columns for screens larger than 820px
     }
 }
 
-// @media (min-width: 960px) {
-//     #movie-list {
-//         margin-top: 7rem;
-//     }
-// }
-
+// Media query for screens larger than 1200px
 @media (min-width: 1200px) {
     #movie-list {
-        grid-template-columns: 33% 34% 33%;
+        grid-template-columns: 33% 34% 33%; // Three columns for screens larger than 1200px
     }
 }

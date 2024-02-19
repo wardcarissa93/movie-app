@@ -1,5 +1,7 @@
+// Import the SCSS file for styling
 import "../styles/About.scss";
 
+// About component definition
 function About() {
   return (
     // <div className="about-container">
@@ -40,4 +42,5 @@ function About() {
   );
 }
 
+// Export the About component
 export default About;
