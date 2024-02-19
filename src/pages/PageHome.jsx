@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MovieList from '../components/MovieList';
 
 // Importing fetch functions for movie categories from movieApi file
-import { 
+import {
   fetchPopularMovies,
   fetchTopRatedMovies,
   fetchNowPlayingMovies,
@@ -17,6 +17,7 @@ import {
 
 // Importing action creator for setting selected category
 import { setSelectedCategory } from '../features/movies/moviesSlice';
+
 
 // PageHome component definition
 function PageHome() {
@@ -34,7 +35,7 @@ function PageHome() {
           fetchedMovies = await fetchTopRatedMovies(); // Fetching top-rated movies
           break;
         case 'now_playing':
-          fetchedMovies = await fetchNowPlayingMovies(); // Fetching now-playing movies
+          fetchedMovies = await fetchNowPlayingMovies(); // Fetching now playing movies
           break;
         case 'upcoming':
           fetchedMovies = await fetchUpcomingMovies(); // Fetching upcoming movies
@@ -46,9 +47,9 @@ function PageHome() {
 
       // Limit the number of movies to 12
       const limitedMovies = fetchedMovies.slice(0, 12);
-      
+
       setMovies(limitedMovies); // Updating movies state with fetched movies
-    };
+    }
 
     fetchMoviesData(); // Calling fetchMoviesData function
   }, [selectedCategory]); // Dependency array with selectedCategory, so useEffect runs when selectedCategory changes
@@ -60,9 +61,13 @@ function PageHome() {
     setFavoriteMessage(''); // Clearing favorite message
   };
 
-  // Function to handle adding a movie to favorites
-  const addToFavorites = (title) => {
-    setFavoriteMessage(`'${title}' added to Favorites`);
+  // Function to handle adding or removing a movie from favorites
+  const handleFavorite = (title, isAdding) => {
+    if (isAdding) {
+      setFavoriteMessage(`'${title}' added to Favorites`);
+    } else {
+      setFavoriteMessage(`'${title}' removed from Favorites`);
+    }
     setTimeout(() => {
       setFavoriteMessage('');
     }, 3000);
@@ -81,12 +86,12 @@ function PageHome() {
           </select>
           movies:
         </label>
-          <div id="message">
-            {favoriteMessage ? favoriteMessage : ''}
-          </div>
+        <div id="message">
+          {favoriteMessage && <span>{favoriteMessage}</span>}
+        </div>
       </div>
       <div className="line"></div> {/* Horizontal line separator */}
-      <MovieList movies={movies} addToFavorites={addToFavorites}/> {/* Rendering MovieList component with fetched movies */}
+      <MovieList movies={movies} addToFavorites={handleFavorite}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
   );

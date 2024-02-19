@@ -24,7 +24,7 @@ function MovieCard({ movie, addToFavorites }) {
 
     const handleToggleFavorite = () => {
         toggleFavorite();
-        addToFavorites(title);
+        addToFavorites(title, !isFavorite); // Pass a boolean indicating whether the movie is being added or removed from favorites
     };
 
     return (

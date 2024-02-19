@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 
 // Import the SCSS file for styling
-import "../styles/MovieList.scss";
+import '../styles/MovieList.scss';
 
 
 // MovieList component definition
@@ -24,10 +24,10 @@ function MovieList({ movies, addToFavorites }) {
 MovieList.propTypes = {
     movies: PropTypes.arrayOf(
         PropTypes.shape({
-           id: PropTypes.number.isRequired // 'id' is required and must be a number
+            id: PropTypes.number.isRequired // 'id' is required and must be a number
         })
     ).isRequired,
-    addToFavorites: PropTypes.func.isRequired, // 'addToFavorites' function is required
+    addToFavorites: PropTypes.func.isRequired // 'addToFavorites' function is required
 };
 
 // Export the MovieList component
