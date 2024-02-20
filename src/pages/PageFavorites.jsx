@@ -35,7 +35,12 @@ function PageFavorites() {
 
   return (
     <div className="page-favorites-container"> {/* Container for the favorites page */}
-      <h3>Your Favorites</h3> {/* Heading for the favorites section */}
+      <div className="title-message">
+        <h3>Your Favorites</h3> {/* Heading for the favorites section */}
+        <div id="message">
+          {/* Display notification message here */}
+        </div>
+      </div>
       <div className="line"></div> {/* Horizontal line separator */}
       {favorites.length === 0 ? ( // Conditional rendering when favorites array is empty
         <div className="empty-favorites-container"> {/* Container for displaying message when favorites array is empty */}

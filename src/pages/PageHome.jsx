@@ -18,12 +18,15 @@ import {
 // Importing action creator for setting selected category
 import { setSelectedCategory } from '../features/movies/moviesSlice';
 
+// Importing action creators for notification handling
+import { setMessage, clearMessage } from '../features/notification/notificationSlice';
+
 // PageHome component definition
 function PageHome() {
   const [movies, setMovies] = useState([]); // State variable to store fetched movies
   const dispatch = useDispatch(); // useDispatch hook for dispatching actions
   const selectedCategory = useSelector(state => state.movies.selectedCategory); // Getting selected category from Redux store
-  const [message, setMessage] = useState(''); // State variable for messages
+  const message = useSelector(state => state.notification.message); // Getting notification message from Redux store
 
   // Fetching movies data based on selected category when the component mounts or when selectedCategory changes
   useEffect(() => {
@@ -57,18 +60,18 @@ function PageHome() {
   const handleCategoryChange = (event) => {
     const newCategory = event.target.value; // Getting new category from select input
     dispatch(setSelectedCategory(newCategory)); // Dispatching action to set selected category
-    setMessage(''); // Clearing message
+    dispatch(clearMessage()); // Clearing message
   };
 
   // Function to handle adding or removing a movie from favorites/watchlist
   const handleListAction = (title, isAdding, listName) => {
     if (isAdding) {
-      setMessage(`'${title}' added to ${listName}`);
+      dispatch(setMessage(`'${title}' added to ${listName}`));
     } else {
-      setMessage(`'${title}' removed from ${listName}`);
+      dispatch(setMessage(`'${title}' removed from ${listName}`));
     }
     setTimeout(() => {
-      setMessage('');
+      dispatch(clearMessage()); // Clear the message after 3 seconds
     }, 3000);
   };
 
