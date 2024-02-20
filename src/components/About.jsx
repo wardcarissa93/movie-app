@@ -4,13 +4,6 @@ import "../styles/About.scss";
 // About component definition
 function About() {
   return (
-    // <div className="about-container">
-    //   <h3>About</h3>
-    //   <div className="line"></div>
-    //   <p>This is a movie app created for educational use.</p>
-    //   {/* Add TMDb attribution here */}
-    //   <div className="line"></div>
-    // </div>
     
     <div id = "aboutDiv">
       <h2>Welcome to Film Finder</h2>

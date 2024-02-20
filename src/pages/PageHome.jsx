@@ -79,7 +79,6 @@ function PageHome() {
     // Update the movies state
     setMovies(limitedMovies);
   
-    // Update the category to 'search'
     setSearchQuery('');
   };
 
@@ -101,7 +100,7 @@ function PageHome() {
           </label>
         </div>
 
-        <div id="search-form" style={{ padding: '1.5rem' }}>
+        <div id="search-form" >
           <form method="GET" onSubmit={handleSearchSubmit}>
             <input
               type="text"
@@ -111,9 +110,9 @@ function PageHome() {
               required
               value={searchQuery}
               onChange={handleSearchChange}
-              style={{ marginRight: '8px' , width: '200px', backgroundColor: '#c4f5fc'}}
+              
             />
-            <button type="submit" style={{ backgroundColor:'#c4f5fc', color: 'black', fontSize:'12px',height: '2rem', border: '2px solid #0a1045', borderRadius: '1rem'}}>Search</button>
+            <button type="submit" >Search</button>
 
           </form>
         </div>    
