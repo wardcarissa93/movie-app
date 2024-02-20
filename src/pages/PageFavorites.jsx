@@ -1,26 +1,28 @@
-// Import useEffect and useState hooks from React
+// Importing React
 import { useEffect, useState } from 'react';
 
-// Import the MovieList component
-import MovieList from '../components/MovieList';
+// Importing useSelector and useDispatch hooks from React Redux
+import { useSelector, useDispatch } from 'react-redux';
 
-// Import the fetchMovieDetails function from movieApi file
+// Importing action creators for notification handling
+import { setMessage, clearMessage } from '../features/notification/notificationSlice';
+
+// Importing fetchMovieDetails function from movieApi file
 import { fetchMovieDetails } from '../api/movieApi';
 
-// Import useSelector hook from Redux
-import { useSelector } from 'react-redux';
+// Importing the MovieList component
+import MovieList from '../components/MovieList';
 
-// Import the SCSS file for styling
+// Importing the SCSS file for styling
 import '../styles/PageFavorites.scss';
-
 
 // PageFavorites component definition
 function PageFavorites() {
-  // Getting favorite movies from Redux store
-  const favorites = useSelector((state) => state.user.favorites);
+  const favorites = useSelector((state) => state.user.favorites); // Getting favorite movies from Redux store
+  const dispatch = useDispatch(); // useDispatch hook for dispatching actions
+  const message = useSelector(state => state.notification.message); // Getting notification message from Redux store
 
-  // Using the useState hook to manage state for favorite movies
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]); // Using the useState hook to manage state for favorite movies
 
   // Fetching favorite movies when the component mounts or when favorites array changes
   useEffect(() => {
@@ -33,12 +35,24 @@ function PageFavorites() {
     fetchFavoriteMovies(); // Calling fetchFavoriteMovies function
   }, [favorites]); // Dependency array with favorites, so UseEffect runs when favorites array changes
 
+  // Function to handle adding or removing a movie from favorites
+  const handleListAction = (title, isAdding, listName) => {
+    if (isAdding) {
+      dispatch(setMessage(`'${title}' added to ${listName}`)); // Dispatching message when adding a movie
+    } else {
+      dispatch(setMessage(`'${title}' removed from ${listName}`)); // Dispatching message when removing a movie
+    }
+    setTimeout(() => {
+      dispatch(clearMessage()); // Clear the message after 3 seconds
+    }, 3000);
+  };
+
   return (
     <div className="page-favorites-container"> {/* Container for the favorites page */}
       <div className="title-message">
         <h3>Your Favorites</h3> {/* Heading for the favorites section */}
         <div id="message">
-          {/* Display notification message here */}
+          {message && <span>{message}</span>}
         </div>
       </div>
       <div className="line"></div> {/* Horizontal line separator */}
@@ -52,7 +66,7 @@ function PageFavorites() {
           </div>
         </div>
       ) : (
-        <MovieList movies={favoriteMovies}/> // Rendering MovieList component with favoriteMovies when favorites array is not empty
+        <MovieList movies={favoriteMovies} handleListAction={handleListAction}/> // Rendering MovieList component with favoriteMovies when favorites array is not empty
       )}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
