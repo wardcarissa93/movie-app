@@ -1,4 +1,4 @@
-// Importing React
+// Importing useEffect and useState hooks from React
 import { useEffect, useState } from 'react';
 
 // Importing useSelector and useDispatch hooks from React Redux
@@ -35,7 +35,7 @@ function PageFavorites() {
     fetchFavoriteMovies(); // Calling fetchFavoriteMovies function
   }, [favorites]); // Dependency array with favorites, so UseEffect runs when favorites array changes
 
-  // Function to handle adding or removing a movie from favorites
+  // Function to handle adding or removing a movie from favorites/watchlist
   const handleListAction = (title, isAdding, listName) => {
     if (isAdding) {
       dispatch(setMessage(`'${title}' added to ${listName}`)); // Dispatching message when adding a movie
