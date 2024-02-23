@@ -1,6 +1,7 @@
 // Import the SCSS file for styling
 import '../styles/PageNotFound.scss';
 
+
 // PageNotFound component definition
 const PageNotFound = () => {
     return (

@@ -4,6 +4,8 @@ import packageJson from '../../package.json';
 // Import SCSS styles for the Footer component
 import '../styles/Footer.scss';
 
+
+// Footer component definition
 function Footer () {
     // Getting the current year
     const currentYear = new Date().getFullYear();
@@ -23,7 +25,7 @@ function Footer () {
             {/* Link to the GitHub repository */}
             <a href="https://github.com/wardcarissa93/movie-app" target="_blank" rel="noreferrer">
                 View the code{/* GitHub logo */}
-                <img src="../../public/images/GitHub-logo.png" id="footer-github-icon" alt="Footer github icon"/>
+                <img src="../../images/GitHub-logo.png" id="footer-github-icon" alt="Footer github icon"/>
             </a>
         </footer>
     )

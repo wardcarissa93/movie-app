@@ -19,6 +19,10 @@ import {
 // Importing action creator for setting selected category
 import { setSelectedCategory } from '../features/movies/moviesSlice';
 
+
+// Importing action creators for notification handling
+import { setMessage, clearMessage } from '../features/notification/notificationSlice';
+
 import "../styles/Homepage.scss";
 
 
@@ -28,6 +32,7 @@ function PageHome() {
   const [movies, setMovies] = useState([]); // State variable to store fetched movies
   const dispatch = useDispatch(); // useDispatch hook for dispatching actions
   const selectedCategory = useSelector(state => state.movies.selectedCategory); // Getting selected category from Redux store
+  const message = useSelector(state => state.notification.message); // Getting notification message from Redux store
 
   // Fetching movies data based on selected category when the component mounts or when selectedCategory changes
   useEffect(() => {
@@ -61,6 +66,19 @@ function PageHome() {
   const handleCategoryChange = (event) => {
     const newCategory = event.target.value; // Getting new category from select input
     dispatch(setSelectedCategory(newCategory)); // Dispatching action to set selected category
+    dispatch(clearMessage()); // Clearing message
+  };
+
+  // Function to handle adding or removing a movie from favorites/watchlist
+  const handleListAction = (title, isAdding, listName) => {
+    if (isAdding) {
+      dispatch(setMessage(`'${title}' added to ${listName}`));
+    } else {
+      dispatch(setMessage(`'${title}' removed from ${listName}`));
+    }
+    setTimeout(() => {
+      dispatch(clearMessage()); // Clear the message after 3 seconds
+    }, 3000);
   };
 
   const handleSearchChange = (event) => {
@@ -85,6 +103,21 @@ function PageHome() {
 
   return (
     <div id="page-home"> {/* Container for the home page */}
+      <div id="category-select-form"> {/* Form for selecting movie category */}
+        <label htmlFor="categorySelect">
+          Display
+          <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
+            <option value="popular">Popular</option>
+            <option value="top_rated">Top Rated</option>
+            <option value="now_playing">Now Playing</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+          movies:
+        </label>
+        <div id="message">
+          {message && <span>{message}</span>}
+        </div>
+      </div>
       <div id = "page-home-div" style={{ display: 'flex' }}>
 
         <div id="category-select-form"> {/* Form for selecting movie category */}
@@ -119,8 +152,9 @@ function PageHome() {
       </div>    
 
 
+
       <div className="line"></div> {/* Horizontal line separator */}
-      <MovieList movies={movies}/> {/* Rendering MovieList component with fetched movies */}
+      <MovieList movies={movies} handleListAction={handleListAction}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
   );

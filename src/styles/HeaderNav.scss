@@ -200,6 +200,10 @@ header {
             padding: 0.25rem 1rem;
             // Applying mixin with parameters
             @include nav-link($color: $secondary-color, $hover-color: black);
+
+            &:hover {
+              color: $tertiary-color;
+            }
           }
         }
       }

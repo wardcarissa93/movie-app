@@ -5,6 +5,17 @@
 .page-watchlist-container {
     margin: 0;
 
+    .title-message {
+        display: flex;
+        flex-direction: column;
+        height: 5rem;
+        justify-content: space-around;
+
+        #message {
+            margin-bottom: 0.75rem;
+        }
+    }
+
     // Styling for the container when watchlist is empty
     .empty-watchlist-container {
         display: flex;

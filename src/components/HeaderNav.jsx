@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "../styles/HeaderNav.scss";
 
+
+// HeaderNav component definition
 const HeaderNav = () => {
   // State to manage menu open/close
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,7 +66,7 @@ const HeaderNav = () => {
 
       {/* Site logo */}
       <Link className={`logo ${isMenuOpen ? "hide" : ""}`} to={'/'} title="Return to Home">
-        <img src="images/logo.svg" alt="site-logo"></img>
+        <img src="../../images/logo-light.svg" alt="site-logo"></img>
       </Link>
 
       {/* Main navigation */}
