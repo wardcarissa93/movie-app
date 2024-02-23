@@ -1,30 +1,40 @@
 @use 'variables' as *;
-#aboutDiv{
+
+#about-div {
     text-align: left;
-    // margin-right: 200px;
-    // margin-left: 100px;
 
-}
-#aboutDiv h2{
-    margin-top: 140px;
-    text-align: center;
+    @media (min-width: 960px) {
+        margin-top: 7rem;
+    }
 
+    #about-title-div {
+        display: flex;
+        flex-direction: column;
+        height: 5rem;
+        
+        #about-title {
+            text-align: center;
+        }
+    }
 
-}
-#aboutDiv h3{
-    color: $primary-color;
-    font-weight: bold;
-}
-.about-container{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 50px;
-    padding: 50px;
-}
-
-@media (min-width: 640px) {
     .about-container {
-       display: grid;
-        grid-template-columns: repeat(2, 45%);
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 3.125rem;
+        padding: 3.125rem;
+
+        @media (min-width: 640px) {
+            display: grid;
+            grid-template-columns: repeat(2, 45%);
+        }
+
+        #tmdb-link {
+            color: $box-shadow-color;
+
+            &:hover {
+                color: $plus-sign-color;
+                font-weight: bold;
+            }
+        }
     }
 }

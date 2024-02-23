@@ -2,6 +2,7 @@
 #movie-list {
     display: grid;
     grid-template-columns: 100%; // Initially one column for smaller screens
+    min-height: 24rem;
 }
 
 // Media query for screens larger than 820px
