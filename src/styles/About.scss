@@ -1,9 +1,30 @@
-// Apply styles only for screens with a minimum width of 960px
-@media (min-width: 960px) {
-    // Select the container for the About section
+@use 'variables' as *;
+#aboutDiv{
+    text-align: left;
+    // margin-right: 200px;
+    // margin-left: 100px;
+
+}
+#aboutDiv h2{
+    margin-top: 140px;
+    text-align: center;
+
+
+}
+#aboutDiv h3{
+    color: $primary-color;
+    font-weight: bold;
+}
+.about-container{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 50px;
+    padding: 50px;
+}
+
+@media (min-width: 640px) {
     .about-container {
-        // Add top margin to create space from the top of the page
-        // (prevent content from overlapping with HeaderNav component)
-        margin-top: 7rem;
+       display: grid;
+        grid-template-columns: repeat(2, 45%);
     }
 }
