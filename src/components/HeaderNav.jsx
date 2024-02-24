@@ -66,7 +66,7 @@ const HeaderNav = () => {
 
       {/* Site logo */}
       <Link className={`logo ${isMenuOpen ? "hide" : ""}`} to={'/'} title="Return to Home">
-        <img src="../../public/images/logo-light.svg" alt="site-logo"></img>
+        <img src="../../src/assets/images/logo-light.svg" alt="site-logo"></img>
       </Link>
 
       {/* Main navigation */}
