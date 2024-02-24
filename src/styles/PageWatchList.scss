@@ -4,6 +4,7 @@
 // Styling for the page watchlist container
 .page-watchlist-container {
     margin: 0;
+    margin-top: 2rem;
 
     .title-message {
         display: flex;
@@ -72,6 +73,6 @@
 
     // Media query for screens larger than 960px
     @media (min-width: 960px) {
-        margin-top: 7rem; // Adjusting top margin to prevent overlap with HeaderNav
+        margin-top: 8rem; // Adjusting top margin to prevent overlap with HeaderNav
     }
 }
