@@ -86,12 +86,20 @@ div {
   padding-top: 1rem;
 }
 
+#search-form > form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 #search {
   margin-right: 0.5rem;
   width: 10.5rem;
   background-color: #c4f5fc;
   border: 1px solid #0a1045;
   font-family: 'Lato', sans-serif;
+  height: 1.2rem;
 }
 
 #search-button {
@@ -113,6 +121,10 @@ div {
     flex-direction: row;
   }
 
+  #page-home-div > div {
+    width: 40%;
+  }
+
   #search-form {
     padding-top: 0;
   }
@@ -124,6 +136,6 @@ div {
 
 @media (min-width: 960px) {
   #page-home {
-    margin-top: 6.5rem;
+    margin-top: 7.5rem;
   }
 }
