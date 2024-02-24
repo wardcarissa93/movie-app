@@ -20,7 +20,7 @@ function About() {
           <p>☆ This product uses the <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer noopener" id="tmdb-link">TMDb API</a> but is not endorsed or certified by TMDb.</p>
           <div>
             <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer noopener">
-              <img src="../../src/assets/images/TMDb.png" alt="TMDb Logo"/>
+              <img src="../../public/images/TMDb.png" alt="TMDb Logo"/>
             </a>
           </div>
         </section>
