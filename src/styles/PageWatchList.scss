@@ -3,8 +3,8 @@
 
 // Styling for the page watchlist container
 .page-watchlist-container {
-    margin: 0;
-    margin-top: 2rem;
+    margin: 0; // Resetting margin
+    margin-top: 2rem; // Adding top margin
 
     .title-message {
         display: flex;

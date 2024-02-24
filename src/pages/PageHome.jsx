@@ -23,8 +23,6 @@ import { setSelectedCategory } from '../features/movies/moviesSlice';
 // Importing action creators for notification handling
 import { setMessage, clearMessage } from '../features/notification/notificationSlice';
 
-// import "../styles/Homepage.scss";
-
 
 // PageHome component definition
 function PageHome() {

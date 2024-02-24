@@ -1,11 +1,12 @@
+// Importing variables
 @use 'variables' as *;
 
 #about-div {
-    text-align: left;
-    margin-top: 2rem;
+    text-align: left; // Align text to the left
+    margin-top: 2rem; // Adding top margin
 
     @media (min-width: 960px) {
-        margin-top: 8rem;
+        margin-top: 8rem; // Adjusting top margin for larger screens
     }
 
     #about-title-div {
@@ -14,32 +15,32 @@
         height: 5rem;
         
         #about-title {
-            text-align: center;
+            text-align: center; // Centering the text
         }
     }
 
     .about-container {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        gap: 3.125rem;
-        padding: 3.125rem;
+        gap: 3.125rem; // Gap between grid items
+        padding: 3.125rem; // Padding for the container
 
         @media (min-width: 640px) {
             display: grid;
-            grid-template-columns: repeat(2, 45%);
+            grid-template-columns: repeat(2, 45%); // Two columns layout for larger screens
         }
 
         #tmdb-link {
-            color: $box-shadow-color;
+            color: $box-shadow-color; // Using box-shadow color variable
 
             &:hover {
-                color: $plus-sign-color;
-                font-weight: bold;
+                color: $plus-sign-color; // Changing color on hover to plus sign color
+                font-weight: bold; // Adding bold font weight on hover
             }
         }
 
         img {
-            width: 10.625rem;
+            width: 10.625rem; // Setting width for images
         }
     }
 }

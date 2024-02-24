@@ -9,7 +9,7 @@ function About() {
       <div id="about-title-div">
         <h3 id="about-title">About</h3> {/* Heading for the About section */}
       </div>
-      <div className="line"></div>
+      <div className="line"></div> {/* Horizontal line separator */}
       <div className="about-container">
         <section>
           <h3>About the Project</h3>
@@ -32,7 +32,7 @@ function About() {
           </p>
         </section>
       </div>
-      <div className="line"></div>
+      <div className="line"></div> {/* Horizontal line separator */}
     </div>   
   );
 }
