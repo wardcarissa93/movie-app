@@ -66,7 +66,7 @@ export const fetchNowPlayingMovies = async () => {
 // Fetch upcoming movies
 export const fetchUpcomingMovies = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/movie/upcoming?api_key=${apiKey}`);
+    const res = await axios.get(`${baseUrl}/movie/upcoming?api_key=${apiKey}&primary_release_date.gte=${new Date().toISOString().split('T')[0]}&region=US`);
     return res.data.results;
   } catch (error) {
     console.error('Error fetching upcoming movies:', error);
