@@ -23,8 +23,6 @@ import { setSelectedCategory } from '../features/movies/moviesSlice';
 // Importing action creators for notification handling
 import { setMessage, clearMessage } from '../features/notification/notificationSlice';
 
-import "../styles/Homepage.scss";
-
 
 // PageHome component definition
 function PageHome() {
@@ -103,24 +101,8 @@ function PageHome() {
 
   return (
     <div id="page-home"> {/* Container for the home page */}
-      <div id="category-select-form"> {/* Form for selecting movie category */}
-        <label htmlFor="categorySelect">
-          Display
-          <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
-            <option value="popular">Popular</option>
-            <option value="top_rated">Top Rated</option>
-            <option value="now_playing">Now Playing</option>
-            <option value="upcoming">Upcoming</option>
-          </select>
-          movies:
-        </label>
-        <div id="message">
-          {message && <span>{message}</span>}
-        </div>
-      </div>
-      <div id = "page-home-div" style={{ display: 'flex' }}>
-
-        <div id="category-select-form"> {/* Form for selecting movie category */}
+      <div id="page-home-div">
+        <div id="category-select-form"> 
           <label htmlFor="categorySelect">
             Display
             <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
@@ -132,7 +114,6 @@ function PageHome() {
             movies:
           </label>
         </div>
-
         <div id="search-form" >
           <form method="GET" onSubmit={handleSearchSubmit}>
             <input
@@ -142,17 +123,15 @@ function PageHome() {
               placeholder='Search for movies, TV shows'
               required
               value={searchQuery}
-              onChange={handleSearchChange}
-              
+              onChange={handleSearchChange} 
             />
-            <button type="submit" >Search</button>
-
+            <button type="submit" id="search-button">Search</button>
           </form>
         </div>    
       </div>    
-
-
-
+      <div id="home-message">
+          {message && <span>{message}</span>}
+      </div>
       <div className="line"></div> {/* Horizontal line separator */}
       <MovieList movies={movies} handleListAction={handleListAction}/> {/* Rendering MovieList component with fetched movies */}
       <div className="line"></div> {/* Horizontal line separator */}

@@ -3,7 +3,8 @@
 
 // Styling for the page favorites container
 .page-favorites-container {
-    margin: 0;
+    margin: 0; // Resetting margin
+    margin-top: 2rem; // Adding top margin
 
     .title-message {
         display: flex;
@@ -12,7 +13,7 @@
         justify-content: space-around;
 
         #message {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.75rem; // Adding margin below the message
         }
     }
 
@@ -69,6 +70,6 @@
 
     // Media query for screens larger than 960px
     @media (min-width: 960px) {
-        margin-top: 7rem; // Adjusting top margin to prevent overlap with HeaderNav
+        margin-top: 8rem; // Adjusting top margin to prevent overlap with HeaderNav
     }
 }

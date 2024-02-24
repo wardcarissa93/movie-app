@@ -66,7 +66,7 @@ function PageFavorites() {
           </div>
         </div>
       ) : (
-        <MovieList movies={favoriteMovies} handleListAction={handleListAction}/> // Rendering MovieList component with favoriteMovies when favorites array is not empty
+        <MovieList id="movie-list-component" movies={favoriteMovies} handleListAction={handleListAction}/> // Rendering MovieList component with favoriteMovies when favorites array is not empty
       )}
       <div className="line"></div> {/* Horizontal line separator */}
     </div>
