@@ -130,7 +130,7 @@ function PageHome() {
         </div>    
       </div>    
       <div id="home-message">
-          {message && <span>{message}</span>}hi
+          {message && <span>{message}</span>}
       </div>
       <div className="line"></div> {/* Horizontal line separator */}
       <MovieList movies={movies} handleListAction={handleListAction}/> {/* Rendering MovieList component with fetched movies */}
