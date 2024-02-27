@@ -25,7 +25,7 @@ function Footer () {
             {/* Link to the GitHub repository */}
             <a href="https://github.com/wardcarissa93/movie-app" target="_blank" rel="noreferrer">
                 View the code{/* GitHub logo */}
-                <img src="images/GitHub-logo.png" id="footer-github-icon" alt="Footer github icon"/>
+                <img src="../../public/images/GitHub-logo.png" id="footer-github-icon" alt="Footer github icon"/>
             </a>
         </footer>
     )
