@@ -65,6 +65,6 @@ export const generateStars = (voteAverage) => {
 export const getPosterPath = (posterPath) => {
     return posterPath
       ? `https://image.tmdb.org/t/p/w500${posterPath}`
-      : '../../public/images/image-not-found.png'; // Fallback image path
+      : 'images/image-not-found.png'; // Fallback image path
   };
   
